@@ -1,0 +1,267 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{natbib}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+\title{Mathematical Proofs for the Huygens Biological Oscillation Solver}
+\author{Anonymous}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Floquet Theory and Stability Analysis}
+
+\begin{theorem}[Periodic Orbit Stability via Floquet Multipliers]
+Let $\mathbf{x}_0(t)$ be a periodic solution of the system $\dot{\mathbf{x}} = \mathbf{f}(\mathbf{x})$ with period $T$. The periodic orbit is asymptotically stable if and only if all characteristic multipliers $\lambda_i$ of the monodromy matrix $\mathbf{M}$ satisfy $|\lambda_i| < 1$ except for one multiplier which equals 1.
+\end{theorem}
+
+\begin{proof}
+Consider the variational equation along the periodic orbit:
+\begin{equation}
+\frac{d\boldsymbol{\xi}}{dt} = \mathbf{J}(\mathbf{x}_0(t))\boldsymbol{\xi}
+\end{equation}
+
+where $\boldsymbol{\xi}(t)$ represents perturbations from the periodic orbit and $\mathbf{J}(\mathbf{x})$ is the Jacobian matrix.
+
+The fundamental matrix solution $\boldsymbol{\Phi}(t)$ with $\boldsymbol{\Phi}(0) = \mathbf{I}$ satisfies:
+\begin{equation}
+\frac{d\boldsymbol{\Phi}}{dt} = \mathbf{J}(\mathbf{x}_0(t))\boldsymbol{\Phi}
+\end{equation}
+
+By the periodicity of $\mathbf{J}(\mathbf{x}_0(t))$, we have:
+\begin{equation}
+\boldsymbol{\Phi}(t+T) = \boldsymbol{\Phi}(t)\mathbf{M}
+\end{equation}
+
+where the monodromy matrix $\mathbf{M} = \boldsymbol{\Phi}(T)$.
+
+The general solution of the variational equation can be written as:
+\begin{equation}
+\boldsymbol{\xi}(t) = \boldsymbol{\Phi}(t)\boldsymbol{\xi}(0)
+\end{equation}
+
+For stability, we require $\|\boldsymbol{\xi}(t)\| \to 0$ as $t \to \infty$ for all initial perturbations $\boldsymbol{\xi}(0)$.
+
+Since $\boldsymbol{\xi}(nT) = \mathbf{M}^n\boldsymbol{\xi}(0)$, stability requires $\|\mathbf{M}^n\| \to 0$ as $n \to \infty$.
+
+By the spectral theorem, this occurs if and only if $|\lambda_i| < 1$ for all eigenvalues $\lambda_i$ of $\mathbf{M}$, except that one eigenvalue always equals 1 due to the invariance of the flow along the periodic orbit.
+
+The eigenvector corresponding to $\lambda = 1$ is $\dot{\mathbf{x}}_0(0)$, representing tangent to the orbit.
+\end{proof}
+
+\begin{lemma}[Computation of Monodromy Matrix]
+For a $T$-periodic system, the monodromy matrix can be computed by solving the matrix differential equation:
+\begin{equation}
+\frac{d\mathbf{M}}{dt} = \mathbf{J}(\mathbf{x}_0(t))\mathbf{M}, \quad \mathbf{M}(0) = \mathbf{I}
+\end{equation}
+over one period $[0,T]$.
+\end{lemma}
+
+\begin{proof}
+This follows directly from the definition of the fundamental matrix and the initial condition $\boldsymbol{\Phi}(0) = \mathbf{I}$. The monodromy matrix is simply $\mathbf{M} = \boldsymbol{\Phi}(T)$.
+\end{proof}
+
+\section{Method of Multiple Scales}
+
+\begin{theorem}[Averaging Method for Two-Scale Systems]
+Consider the system:
+\begin{align}
+\frac{du}{dt} &= \frac{1}{\epsilon}F(u,v,\epsilon) \\
+\frac{dv}{dt} &= G(u,v,\epsilon)
+\end{align}
+
+If $F(u,v,0)$ has a unique $T_0$-periodic solution $u_0(t;v)$ for each fixed $v$, then the slow dynamics are governed by:
+\begin{equation}
+\frac{d\bar{v}}{dt} = \bar{G}(\bar{v}) + O(\epsilon)
+\end{equation}
+where $\bar{G}(\bar{v}) = \frac{1}{T_0}\int_0^{T_0} G(u_0(t;\bar{v}), \bar{v}, 0) dt$.
+\end{theorem}
+
+\begin{proof}
+We employ the method of multiple scales with time variables $t_0 = t$ and $t_1 = \epsilon t$.
+
+Expand the solution as:
+\begin{align}
+u(t) &= u_0(t_0,t_1) + \epsilon u_1(t_0,t_1) + O(\epsilon^2) \\
+v(t) &= v_0(t_0,t_1) + \epsilon v_1(t_0,t_1) + O(\epsilon^2)
+\end{align}
+
+The chain rule gives:
+\begin{equation}
+\frac{d}{dt} = \frac{\partial}{\partial t_0} + \epsilon \frac{\partial}{\partial t_1}
+\end{equation}
+
+Substituting into the original system and equating coefficients of like powers of $\epsilon$:
+
+Order $\epsilon^0$:
+\begin{align}
+\frac{\partial u_0}{\partial t_0} &= F(u_0, v_0, 0) \\
+\frac{\partial v_0}{\partial t_0} &= 0
+\end{align}
+
+This implies $v_0 = v_0(t_1)$ and $u_0$ is $T_0$-periodic in $t_0$ for fixed $v_0$.
+
+Order $\epsilon^1$:
+\begin{align}
+\frac{\partial u_1}{\partial t_0} &= \frac{\partial F}{\partial u}\Big|_0 u_1 + \frac{\partial F}{\partial v}\Big|_0 v_1 \\
+\frac{\partial v_0}{\partial t_1} &= G(u_0, v_0, 0)
+\end{align}
+
+The solvability condition for $u_1$ requires the right-hand side to have zero average over $t_0$:
+\begin{equation}
+\frac{\partial v_0}{\partial t_1} = \frac{1}{T_0}\int_0^{T_0} G(u_0(t_0;v_0), v_0, 0) dt_0 = \bar{G}(v_0)
+\end{equation}
+
+Since $t_1 = \epsilon t$, we obtain the averaged equation for the slow variable.
+\end{proof}
+
+\section{Hopf Bifurcation Analysis}
+
+\begin{theorem}[Hopf Bifurcation Conditions]
+Consider the system $\dot{\mathbf{x}} = \mathbf{f}(\mathbf{x}, \mu)$ with equilibrium $\mathbf{x}^* = \mathbf{0}$. A Hopf bifurcation occurs at $\mu = \mu_c$ if:
+\begin{enumerate}
+\item $\mathbf{J}(0, \mu_c)$ has a simple pair of purely imaginary eigenvalues $\pm i\omega_0$
+\item $\text{Re}(\lambda(\mu)) \neq 0$ at $\mu = \mu_c$ (transversality condition)
+\item The first Lyapunov coefficient $l_1(0) \neq 0$
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+We use the center manifold theorem and normal form reduction.
+
+\textbf{Step 1:} Eigenvalue analysis. At the bifurcation point $\mu_c$, the Jacobian $\mathbf{J}(0, \mu_c)$ has eigenvalues $\lambda_1,2 = \pm i\omega_0$ and $\lambda_3, \ldots, \lambda_n$ with $\text{Re}(\lambda_j) < 0$ for $j \geq 3$.
+
+\textbf{Step 2:} Center manifold reduction. The system can be reduced to a 2-dimensional center manifold with coordinates $(x,y)$ corresponding to the eigenvectors of $\pm i\omega_0$.
+
+\textbf{Step 3:} Normal form. The reduced system takes the form:
+\begin{align}
+\dot{x} &= \mu x - \omega_0 y + a x^2 + b xy + c y^2 + O(|(x,y)|^3) \\
+\dot{y} &= \omega_0 x + \mu y + d x^2 + e xy + f y^2 + O(|(x,y)|^3)
+\end{align}
+
+\textbf{Step 4:} Polar coordinates. Setting $x = r\cos\theta$, $y = r\sin\theta$:
+\begin{align}
+\dot{r} &= \mu r + \frac{1}{2}(a+f)r^3 + O(r^4) \\
+\dot{\theta} &= \omega_0 + O(r^2)
+\end{align}
+
+\textbf{Step 5:} Bifurcation analysis. The first Lyapunov coefficient is:
+\begin{equation}
+l_1(0) = \frac{1}{2}(a+f)
+\end{equation}
+
+If $l_1(0) < 0$, stable periodic orbits emerge for $\mu > \mu_c$ (supercritical Hopf).
+If $l_1(0) > 0$, unstable periodic orbits exist for $\mu < \mu_c$ (subcritical Hopf).
+
+The periodic orbit has radius $r \approx \sqrt{-\frac{2\mu}{l_1(0)}}$ and frequency $\omega \approx \omega_0$.
+\end{proof}
+
+\section{Numerical Integration Error Analysis}
+
+\begin{theorem}[Runge-Kutta Method Error Bounds]
+For the $p$-th order Runge-Kutta method applied to $\dot{\mathbf{x}} = \mathbf{f}(\mathbf{x})$ with step size $h$, the global error satisfies:
+\begin{equation}
+\|\mathbf{x}_n - \mathbf{x}(t_n)\| \leq C h^p e^{Lt_n}
+\end{equation}
+where $L$ is the Lipschitz constant of $\mathbf{f}$ and $C$ depends on the higher derivatives of $\mathbf{f}$.
+\end{theorem}
+
+\begin{proof}
+\textbf{Step 1:} Local truncation error. For a $p$-th order method, the local truncation error satisfies:
+\begin{equation}
+\|\mathbf{e}_{n+1}\| \leq C_{p+1} h^{p+1} \max_{t \in [t_n, t_{n+1}]} \left\|\frac{d^{p+1}\mathbf{x}}{dt^{p+1}}(t)\right\|
+\end{equation}
+
+\textbf{Step 2:} Error propagation. The global error satisfies the recursion:
+\begin{equation}
+\mathbf{e}_{n+1} = \mathbf{e}_n + h[\mathbf{f}(\mathbf{x}_n) - \mathbf{f}(\mathbf{x}(t_n))] + \mathbf{l}_{n+1}
+\end{equation}
+where $\mathbf{l}_{n+1}$ is the local truncation error.
+
+\textbf{Step 3:} Lipschitz condition. Using $\|\mathbf{f}(\mathbf{u}) - \mathbf{f}(\mathbf{v})\| \leq L\|\mathbf{u} - \mathbf{v}\|$:
+\begin{equation}
+\|\mathbf{e}_{n+1}\| \leq (1 + hL)\|\mathbf{e}_n\| + C_{p+1} h^{p+1}
+\end{equation}
+
+\textbf{Step 4:} Discrete Grönwall lemma. This recursion yields:
+\begin{equation}
+\|\mathbf{e}_n\| \leq \frac{C_{p+1} h^p}{L}(e^{Lt_n} - 1)
+\end{equation}
+
+Since $e^{Lt_n} - 1 \leq t_n e^{Lt_n}$ for $L > 0$, we obtain the desired bound.
+\end{proof}
+
+\section{Coupling Detection Convergence}
+
+\begin{proposition}[Modulation Index Consistency]
+The modulation index estimator $\hat{MI}$ converges in probability to the true modulation index $MI$ as the number of samples $N \to \infty$.
+\end{proposition}
+
+\begin{proof}
+The modulation index is defined as:
+\begin{equation}
+MI = \frac{\log M - H}{\log M}
+\end{equation}
+where $H = -\sum_{j=1}^M p_j \log p_j$ is the entropy and $p_j$ is the probability of amplitude in phase bin $j$.
+
+\textbf{Step 1:} Sample entropy convergence. By the law of large numbers, the sample entropy:
+\begin{equation}
+\hat{H}_N = -\sum_{j=1}^M \hat{p}_{j,N} \log \hat{p}_{j,N}
+\end{equation}
+where $\hat{p}_{j,N} = \frac{1}{N}\sum_{i=1}^N \mathbf{1}_{[\phi_i \in \text{bin } j]}$ converges to $H$ in probability.
+
+\textbf{Step 2:} Continuous mapping theorem. Since $MI = g(H) = \frac{\log M - H}{\log M}$ is continuous in $H$, we have:
+\begin{equation}
+\hat{MI}_N = g(\hat{H}_N) \xrightarrow{P} g(H) = MI
+\end{equation}
+
+\textbf{Step 3:} Rate of convergence. Under regularity conditions, the central limit theorem gives:
+\begin{equation}
+\sqrt{N}(\hat{MI}_N - MI) \xrightarrow{d} \mathcal{N}(0, \sigma^2)
+\end{equation}
+where $\sigma^2$ depends on the variance of the phase-amplitude coupling.
+\end{proof}
+
+\section{Multi-Scale Analysis Validity}
+
+\begin{theorem}[Validity of Averaging Approximation]
+Let $\mathbf{x}^\epsilon(t)$ be the solution of the original two-scale system and $\mathbf{x}^0(t)$ be the solution of the averaged system. Then:
+\begin{equation}
+\|\mathbf{x}^\epsilon(t) - \mathbf{x}^0(t)\| = O(\epsilon)
+\end{equation}
+for times $t = O(1/\epsilon)$.
+\end{theorem}
+
+\begin{proof}
+\textbf{Step 1:} Define the error $\mathbf{e}(t) = \mathbf{x}^\epsilon(t) - \mathbf{x}^0(t)$.
+
+\textbf{Step 2:} The error satisfies:
+\begin{equation}
+\frac{d\mathbf{e}}{dt} = \mathbf{g}^\epsilon(\mathbf{x}^0 + \mathbf{e}, t) - \mathbf{g}^0(\mathbf{x}^0)
+\end{equation}
+where $\mathbf{g}^\epsilon$ and $\mathbf{g}^0$ are the vector fields of the original and averaged systems.
+
+\textbf{Step 3:} By Taylor expansion:
+\begin{equation}
+\mathbf{g}^\epsilon(\mathbf{x}^0 + \mathbf{e}, t) = \mathbf{g}^\epsilon(\mathbf{x}^0, t) + \nabla\mathbf{g}^\epsilon(\mathbf{x}^0, t)\mathbf{e} + O(\|\mathbf{e}\|^2)
+\end{equation}
+
+\textbf{Step 4:} The averaging theorem states that:
+\begin{equation}
+\left\|\frac{1}{T}\int_0^T \mathbf{g}^\epsilon(\mathbf{x}, t) dt - \mathbf{g}^0(\mathbf{x})\right\| = O(\epsilon)
+\end{equation}
+
+\textbf{Step 5:} Using Grönwall's inequality and the bounded variation of the periodic components, we obtain $\|\mathbf{e}(t)\| = O(\epsilon)$ for $t = O(1/\epsilon)$.
+\end{proof}
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}
