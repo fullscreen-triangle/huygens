@@ -35,8 +35,11 @@ python quick_demo.py
 # Quick validation (recommended for comprehensive testing)
 python run_validation.py --quick
 
-# Full comprehensive validation
+# Full comprehensive validation (ALL domains, ALL experiments)
 python run_validation.py --comprehensive
+
+# Domain-specific biological validations
+python run_validation.py --domains
 
 # Interactive dashboard (requires dash)
 python run_validation.py --dashboard
@@ -55,7 +58,8 @@ python run_validation.py --all
 
 - **`quick_demo.py`**: Fast 2-minute demonstration showing all framework validations with visualizations
 - **`--quick`**: Essential validations (~10 minutes) with key visualizations and reports  
-- **`--comprehensive`**: Complete validation (~30 minutes) with full mathematical analysis
+- **`--comprehensive`**: Complete validation (~60 minutes) with ALL biological domains and mathematical analysis
+- **`--domains`**: Domain-specific validations (genome, intracellular, membrane, physics, tissue)
 - **`--dashboard`**: Interactive web interface for real-time exploration and visualization
 - **`--demo`**: Specialized simulations demonstrating individual framework components
 - **`--gallery`**: Creates comprehensive visualization gallery of all theoretical predictions
@@ -95,7 +99,26 @@ Sophisticated mathematical validation tools:
 - **StatisticalComplexityValidator**: O(1) complexity tests, significance testing
 - **PatternAlignmentAnalyzer**: Pattern library analysis, biological recognition models
 
-### 4. Interactive Dashboard
+### 4. Specialized Domain Validators
+
+Each biological domain has its own comprehensive validator with 3+ rigorous experiments:
+
+- **`src/genome/`**: Genome oscillatory dynamics with DNA library consultation, St-Stella's sequence recognition, evolutionary optimization
+- **`src/intracellular/`**: Intracellular dynamics with hierarchical circuits, ATP-constrained computation, metabolic networks
+- **`src/membrane/`**: Membrane dynamics with ENAQT quantum transport, quantum computer resolution, oscillatory transport
+- **`src/physics/`**: Physics foundations with bounded system theorem, S-entropy navigation, universal constants
+- **`src/tissue/`**: Tissue dynamics with cell communication networks, morphogenetic patterns, mechanotransduction
+
+### 5. Comprehensive Integration System (`src/comprehensive_validator.py`)
+
+Master validation system that coordinates all domains:
+
+- **Cross-domain analysis**: Integration metrics and frequency coupling analysis
+- **Theoretical prediction validation**: Tests all major framework predictions
+- **Master visualizations**: Unified dashboard showing all domain validations
+- **Comprehensive reporting**: Scientific-grade validation reports
+
+### 6. Interactive Dashboard
 
 Real-time web-based visualization and control interface:
 

@@ -59,13 +59,78 @@ def run_quick_validation():
     return validator
 
 def run_comprehensive_validation():
-    """Run complete comprehensive validation"""
+    """Run complete comprehensive validation using the master validator"""
     print("🌟 Running COMPREHENSIVE Universal Framework Validation...")
+    print("This will validate ALL biological domains with ALL experiments!")
     
-    validator = UniversalBiologicalValidator(results_dir="comprehensive_validation_results")
-    validator.run_complete_validation()
+    # Import the comprehensive validator
+    sys.path.insert(0, str(Path(__file__).parent / "src"))
+    from comprehensive_validator import run_comprehensive_validation as run_master_validation
+    
+    # Run the master comprehensive validation
+    validator, domain_results, validation_success = run_master_validation()
     
     return validator
+
+def run_domain_specific_validation():
+    """Run validation for specific biological domains"""
+    print("🔬 Running Domain-Specific Validation...")
+    
+    # Import specialized validators
+    sys.path.insert(0, str(Path(__file__).parent / "src"))
+    
+    from genome.oscillatory_genome_validator import GenomeOscillatoryValidator
+    from intracellular.oscillatory_intracellular_validator import IntracellularOscillatoryValidator
+    from membrane.oscillatory_membrane_validator import MembraneOscillatoryValidator
+    from physics.oscillatory_physics_validator import PhysicsOscillatoryValidator
+    from tissue.oscillatory_tissue_validator import TissueOscillatoryValidator
+    
+    # Let user choose which domains to validate
+    available_domains = {
+        'genome': ('🧬 Genome Dynamics', GenomeOscillatoryValidator),
+        'intracellular': ('⚡ Intracellular Dynamics', IntracellularOscillatoryValidator),
+        'membrane': ('🧬 Membrane Dynamics', MembraneOscillatoryValidator),
+        'physics': ('⚛️ Physics Foundations', PhysicsOscillatoryValidator),
+        'tissue': ('🧪 Tissue Dynamics', TissueOscillatoryValidator)
+    }
+    
+    print("\nAvailable domains for validation:")
+    for key, (description, _) in available_domains.items():
+        print(f"  {key}: {description}")
+    
+    # For now, run all domains (can be made interactive later)
+    print("\nRunning all domain validations...")
+    
+    domain_results = {}
+    for domain, (description, ValidatorClass) in available_domains.items():
+        print(f"\n{description}")
+        print("-" * 50)
+        
+        try:
+            validator = ValidatorClass(f"domain_validation_results/{domain}")
+            
+            if domain == 'genome':
+                results = validator.run_comprehensive_genome_validation()
+            elif domain == 'intracellular':
+                results = validator.run_comprehensive_intracellular_validation()
+            elif domain == 'membrane':
+                results = validator.run_comprehensive_membrane_validation()
+            elif domain == 'physics':
+                results = validator.run_comprehensive_physics_validation()
+            elif domain == 'tissue':
+                results = validator.run_comprehensive_tissue_validation()
+            
+            domain_results[domain] = results
+            print(f"✅ {description} validation completed!")
+            
+        except Exception as e:
+            print(f"❌ Error in {domain} validation: {str(e)}")
+            domain_results[domain] = {'error': str(e)}
+    
+    print(f"\n🌟 Domain-specific validation completed!")
+    print(f"Results saved in: domain_validation_results/")
+    
+    return domain_results
 
 def run_interactive_dashboard():
     """Launch interactive dashboard for real-time exploration"""
@@ -426,6 +491,8 @@ Examples:
                        help='Run quick validation of key components')
     parser.add_argument('--comprehensive', action='store_true', 
                        help='Run comprehensive validation of all components')
+    parser.add_argument('--domains', action='store_true',
+                       help='Run domain-specific biological validations')
     parser.add_argument('--dashboard', action='store_true', 
                        help='Launch interactive dashboard')
     parser.add_argument('--demo', action='store_true', 
@@ -437,11 +504,12 @@ Examples:
     
     args = parser.parse_args()
     
-    if not any([args.quick, args.comprehensive, args.dashboard, args.demo, args.gallery, args.all]):
+    if not any([args.quick, args.comprehensive, args.domains, args.dashboard, args.demo, args.gallery, args.all]):
         print("🌟 Universal Biological Oscillatory Framework Validation Platform 🌟")
         print("\nAvailable options:")
         print("  --quick          : Quick validation of key components")
         print("  --comprehensive  : Full comprehensive validation")
+        print("  --domains        : Domain-specific biological validations")
         print("  --dashboard      : Interactive web dashboard")
         print("  --demo           : Demonstration simulations")
         print("  --gallery        : Visualization gallery")
@@ -454,6 +522,9 @@ Examples:
     
     if args.comprehensive or args.all:
         run_comprehensive_validation()
+    
+    if args.domains or args.all:
+        run_domain_specific_validation()
     
     if args.demo or args.all:
         run_demo_simulations()
