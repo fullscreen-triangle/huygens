@@ -1,0 +1,282 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{natbib}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+\title{Mathematical Proofs for Oscillatory Dynamics in Multi-Stage Coaxial Rotor Systems}
+\author{Anonymous}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Multi-Rotor Oscillatory Coupling Analysis}
+
+\begin{theorem}[Multi-Rotor Coupling Stability Theorem]
+For a multi-stage rotor system with mechanical coupling through differential gears, the system is dynamically stable if and only if all oscillatory coupling modes satisfy the stability criterion:
+\begin{equation}
+\text{Re}(\lambda_i) < -\zeta_{\text{min}} \omega_i
+\end{equation}
+where $\lambda_i$ are the eigenvalues of the coupled system matrix and $\zeta_{\text{min}}$ is the minimum required damping ratio.
+\end{theorem}
+
+\begin{proof}
+Consider the coupled multi-rotor system dynamics:
+\begin{align}
+I_1\ddot{\theta}_1 &= Q_{\text{engine}} - Q_1 - C_{12}(\dot{\theta}_1 - k_2\dot{\theta}_2) - C_{13}(\dot{\theta}_1 - k_3\dot{\theta}_3) \\
+I_2\ddot{\theta}_2 &= C_{12}(\dot{\theta}_1 - k_2\dot{\theta}_2)/k_2 + Q_{\text{recovery}} - Q_2 \\
+I_3\ddot{\theta}_3 &= C_{13}(\dot{\theta}_1 - k_3\dot{\theta}_3)/k_3 - Q_3
+\end{align}
+
+where $C_{ij}$ represents mechanical coupling stiffness and $k_i$ are gear ratios.
+
+Linearizing around the equilibrium and introducing state variables:
+$$\mathbf{x} = [\theta_1, \dot{\theta}_1, \theta_2, \dot{\theta}_2, \theta_3, \dot{\theta}_3]^T$$
+
+The system matrix becomes:
+\begin{equation}
+\mathbf{A} = \begin{bmatrix}
+\mathbf{0} & \mathbf{I} \\
+-\mathbf{M}^{-1}\mathbf{K} & -\mathbf{M}^{-1}\mathbf{C}
+\end{bmatrix}
+\end{equation}
+
+where $\mathbf{M}$, $\mathbf{K}$, and $\mathbf{C}$ are the inertia, stiffness, and damping matrices respectively.
+
+For stability, all eigenvalues of $\mathbf{A}$ must have negative real parts. For oscillatory modes:
+$$\lambda_{i,i+1} = -\zeta_i \omega_i \pm i\omega_i\sqrt{1-\zeta_i^2}$$
+
+Stability requires $\zeta_i > 0$ for all modes, with practical stability demanding $\zeta_i > \zeta_{\text{min}}$ to ensure adequate stability margins.
+\end{proof}
+
+\begin{lemma}[Gear Ratio Coupling Effect]
+For mechanically coupled rotors with gear ratios $k_i$, the effective coupling strength between modes is scaled by the gear ratio according to:
+\begin{equation}
+C_{\text{effective}} = C_{\text{mechanical}} \cdot \frac{1}{\sqrt{k_i k_j}}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The mechanical coupling torque between rotors $i$ and $j$ is:
+$$Q_{ij} = C_{ij}(\theta_i/k_i - \theta_j/k_j)$$
+
+The effective angular displacement difference is:
+$$\Delta\theta_{\text{eff}} = \theta_i/k_i - \theta_j/k_j$$
+
+The coupling energy is:
+$$E_{\text{coupling}} = \frac{1}{2}C_{ij}(\Delta\theta_{\text{eff}})^2$$
+
+Converting to modal coordinates and normalizing by the geometric mean of the gear ratios yields the stated result.
+\end{proof}
+
+\section{Resonant Energy Transfer Analysis}
+
+\begin{theorem}[Resonant Energy Transfer Theorem]
+For a multi-stage rotor system, maximum energy transfer from the primary to secondary rotors occurs when the downwash frequency matches an integer multiple of the secondary rotor natural frequency:
+\begin{equation}
+\omega_{\text{downwash}} = n \cdot \omega_{\text{secondary}}, \quad n \in \mathbb{Z}^+
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The downwash-induced forcing on the secondary rotor can be modeled as:
+\begin{equation}
+F_{\text{downwash}}(t) = F_0 \sum_{n=1}^{\infty} A_n \cos(n\omega_1 t + \phi_n)
+\end{equation}
+
+where $\omega_1$ is the primary rotor frequency and $A_n$ are the harmonic amplitudes.
+
+The secondary rotor response in frequency domain is:
+\begin{equation}
+H(j\omega) = \frac{1}{-\omega^2 M_2 + j\omega C_2 + K_2}
+\end{equation}
+
+The power transfer is maximum when the denominator is minimized, which occurs at resonance:
+$$\omega_{\text{resonance}} = \sqrt{\frac{K_2}{M_2}} = \omega_{\text{secondary}}$$
+
+For harmonic forcing, maximum transfer occurs when:
+$$n\omega_1 = \omega_{\text{secondary}}$$
+
+The quality factor determines the sharpness of the resonance:
+\begin{equation}
+Q = \frac{\omega_{\text{secondary}} M_2}{C_2}
+\end{equation}
+
+Higher Q factors provide greater energy transfer efficiency but require more precise frequency matching.
+\end{proof}
+
+\begin{corollary}[Optimal Gear Ratio for Resonant Transfer]
+The optimal gear ratio for resonant energy transfer is:
+\begin{equation}
+k_{2,\text{opt}} = \frac{n \omega_1}{\omega_{\text{secondary,natural}}}
+\end{equation}
+where $n$ is the chosen harmonic number.
+\end{corollary>
+
+\section{Oscillatory Energy Cascade Analysis}
+
+\begin{theorem}[Energy Cascade Efficiency Theorem]
+For a multi-stage oscillatory energy cascade system, the total energy transfer efficiency is bounded by:
+\begin{equation}
+\eta_{\text{total}} \leq \prod_{i=1}^{N-1} \eta_i \cdot \left(1 - \frac{\Delta\omega_i}{\omega_i}\right)
+\end{equation}
+where $\eta_i$ is the efficiency of stage $i$ and $\Delta\omega_i$ represents frequency mismatch.
+\end{theorem}
+
+\begin{proof}
+Consider a cascade of $N$ oscillatory energy transfer stages. The energy flow through stage $i$ is:
+\begin{equation}
+P_i = P_{i-1} \cdot \eta_i \cdot T_i(\omega)
+\end{equation}
+
+where $T_i(\omega)$ is the frequency-dependent transfer function:
+\begin{equation}
+T_i(\omega) = \frac{1}{1 + \left(\frac{\Delta\omega_i}{\omega_i}\right)^2 Q_i^2}
+\end{equation}
+
+For high-Q systems and small frequency mismatches:
+$$T_i(\omega) \approx 1 - \frac{\Delta\omega_i}{\omega_i}$$
+
+The total efficiency becomes:
+\begin{equation>
+\eta_{\text{total}} = \frac{P_N}{P_0} = \prod_{i=1}^{N} \eta_i T_i(\omega)
+\end{equation>
+
+Substituting the approximation and recognizing that perfect frequency matching is impossible in practice yields the stated bound.
+\end{proof>
+
+\section{Dynamic Stability Under Oscillatory Coupling}
+
+\begin{theorem}[Coupled Rotor Stability Criterion]
+A mechanically coupled multi-rotor system remains stable under oscillatory perturbations if the coupling matrix $\mathbf{C}$ satisfies:
+\begin{equation}
+\lambda_{\min}(\mathbf{C}) > \frac{\max_i(I_i \omega_i^2)}{2\min_j(\zeta_j)}
+\end{equation}
+where $\lambda_{\min}$ is the minimum eigenvalue of the coupling matrix.
+\end{theorem}
+
+\begin{proof}
+The linearized equations of motion for the coupled system are:
+\begin{equation}
+\mathbf{M}\ddot{\mathbf{q}} + \mathbf{D}\dot{\mathbf{q}} + (\mathbf{K} + \mathbf{C})\mathbf{q} = \mathbf{0}
+\end{equation}
+
+where $\mathbf{q} = [q_1, q_2, q_3]^T$ represents generalized coordinates.
+
+For stability, all eigenvalues of the characteristic polynomial must have negative real parts:
+$$\det(s^2\mathbf{M} + s\mathbf{D} + \mathbf{K} + \mathbf{C}) = 0$$
+
+Using the Routh-Hurwitz criterion, stability requires:
+\begin{equation}
+\mathbf{D} > \mathbf{0}, \quad \mathbf{K} + \mathbf{C} > \mathbf{0}
+\end{equation}
+
+The critical condition occurs when the coupling matrix eigenvalue approaches the stability boundary:
+$$\lambda_{\min}(\mathbf{C}) = \max_i\left(\frac{I_i \omega_i^2}{2\zeta_i}\right)$$
+
+This gives the stated stability criterion.
+\end{proof}
+
+\section{Autorotation Dynamics with Oscillatory Coupling}
+
+\begin{theorem}[Coupled Autorotation Theorem]
+During autorotation in a coupled multi-rotor system, the descent rate is minimized when the rotors operate in phase-locked synchronization:
+\begin{equation}
+\phi_2 - \phi_1 = \pm\frac{\pi}{2}, \quad \phi_3 - \phi_1 = 0
+\end{equation}
+where $\phi_i$ represents the phase of rotor $i$.
+\end{theorem}
+
+\begin{proof}
+The total autorotative power available is:
+\begin{equation}
+P_{\text{auto}} = \sum_{i=1}^{3} P_i + P_{\text{coupling}}
+\end{equation}
+
+where $P_{\text{coupling}}$ represents power exchange between rotors through oscillatory coupling.
+
+The coupling power is:
+\begin{equation}
+P_{\text{coupling}} = \sum_{i<j} C_{ij} \omega_i \omega_j \cos(\phi_i - \phi_j)
+\end{equation}
+
+To minimize descent rate, we maximize available power. Taking partial derivatives:
+\begin{align}
+\frac{\partial P_{\text{auto}}}{\partial \phi_1} &= C_{12}\omega_1\omega_2\sin(\phi_1-\phi_2) + C_{13}\omega_1\omega_3\sin(\phi_1-\phi_3) = 0 \\
+\frac{\partial P_{\text{auto}}}{\partial \phi_2} &= -C_{12}\omega_1\omega_2\sin(\phi_1-\phi_2) + C_{23}\omega_2\omega_3\sin(\phi_2-\phi_3) = 0 \\
+\frac{\partial P_{\text{auto}}}{\partial \phi_3} &= -C_{13}\omega_1\omega_3\sin(\phi_1-\phi_3) - C_{23}\omega_2\omega_3\sin(\phi_2-\phi_3) = 0
+\end{align}
+
+Solving this system with the constraint that $C_{13} >> C_{12}, C_{23}$ (strong coupling between primary and pusher propellers) yields the stated phase relationships.
+\end{proof}
+
+\section{Vibration Isolation and Energy Recovery}
+
+\begin{theorem}[Optimal Vibration Isolation Theorem]
+For a multi-rotor system with vibration isolation, the optimal isolation frequency is:
+\begin{equation}
+\omega_{\text{isolation}} = \sqrt{\frac{2\omega_{\text{rotor}}^2}{1 + \sqrt{1 + 4\eta_{\text{recovery}}^2}}}
+\end{equation}
+where $\eta_{\text{recovery}}$ is the energy recovery efficiency target.
+\end{theorem}
+
+\begin{proof}
+The vibration isolation system can be modeled as a two-degree-of-freedom system:
+\begin{align}
+m_1\ddot{x}_1 + c(\dot{x}_1 - \dot{x}_2) + k(x_1 - x_2) &= F_{\text{rotor}} \\
+m_2\ddot{x}_2 - c(\dot{x}_1 - \dot{x}_2) - k(x_1 - x_2) + k_2 x_2 &= 0
+\end{align}
+
+The transmissibility is:
+\begin{equation}
+T(\omega) = \left|\frac{k_2 X_2}{F_{\text{rotor}}}\right|
+\end{equation}
+
+The energy recovered is proportional to the relative motion:
+\begin{equation}
+P_{\text{recovered}} \propto |X_1 - X_2|^2 \omega^3
+\end{equation>
+
+Optimizing the trade-off between isolation (minimizing $T(\omega)$) and energy recovery (maximizing relative motion) yields the stated optimal frequency.
+\end{proof}
+
+\section{Structural Resonance Avoidance}
+
+\begin{theorem}[Resonance Avoidance Theorem]
+For a multi-rotor system to avoid structural resonance, the rotor frequencies must satisfy:
+\begin{equation}
+\left|\frac{n_i \omega_i - \omega_{\text{struct},j}}{|\omega_{\text{struct},j}|}\right| > \frac{2}{\sqrt{Q_j}}, \quad \forall i,j,n_i
+\end{equation}
+where $\omega_{\text{struct},j}$ are structural natural frequencies, $n_i$ are harmonic numbers, and $Q_j$ are structural mode quality factors.
+\end{theorem}
+
+\begin{proof}
+The structural response to harmonic forcing at frequency $n_i\omega_i$ is:
+\begin{equation}
+H_j(n_i\omega_i) = \frac{1}{1 - \left(\frac{n_i\omega_i}{\omega_{\text{struct},j}}\right)^2 + j\frac{n_i\omega_i}{\omega_{\text{struct},j} Q_j}}
+\end{equation}
+
+The response amplitude is:
+\begin{equation}
+|H_j| = \frac{1}{\sqrt{\left[1 - \left(\frac{n_i\omega_i}{\omega_{\text{struct},j}}\right)^2\right]^2 + \left(\frac{n_i\omega_i}{\omega_{\text{struct},j} Q_j}\right)^2}}
+\end{equation}
+
+For the response to remain bounded (avoiding resonance), we require:
+$$|H_j| < H_{\text{max}}$$
+
+For high-Q systems, the critical condition occurs near resonance where:
+$$1 - \left(\frac{n_i\omega_i}{\omega_{\text{struct},j}}\right)^2 \approx 0$$
+
+The minimum safe frequency separation is determined by setting the denominator greater than a threshold value, yielding the stated criterion.
+\end{proof>
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}

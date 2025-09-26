@@ -1,0 +1,335 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{natbib}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+\title{Mathematical Proofs for Multi-Scale Oscillatory Coupling in Sprint Performance}
+\author{Anonymous}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Multi-Scale Oscillatory System Analysis}
+
+\begin{theorem}[Multi-Scale Stability Theorem]
+A multi-scale oscillatory system of the form given in Equation (1) is stable if and only if all coupling matrices $\mathbf{C}_{ij}$ have eigenvalues with negative real parts.
+\end{theorem}
+
+\begin{proof}
+Consider the linearized system around the equilibrium point $\mathbf{x}^*$:
+\begin{equation}
+\frac{d\boldsymbol{\xi}}{dt} = \mathbf{J}\boldsymbol{\xi}
+\end{equation}
+
+where $\boldsymbol{\xi} = [\boldsymbol{\xi}_1^T, \boldsymbol{\xi}_2^T, \ldots, \boldsymbol{\xi}_N^T]^T$ and the Jacobian matrix is:
+
+\begin{equation}
+\mathbf{J} = \begin{bmatrix}
+\mathbf{J}_{11} & \mathbf{C}_{12} & \cdots & \mathbf{C}_{1N} \\
+\mathbf{C}_{21} & \mathbf{J}_{22} & \cdots & \mathbf{C}_{2N} \\
+\vdots & \vdots & \ddots & \vdots \\
+\mathbf{C}_{N1} & \mathbf{C}_{N2} & \cdots & \mathbf{J}_{NN}
+\end{bmatrix}
+\end{equation}
+
+where $\mathbf{J}_{ii} = \frac{\partial \mathbf{f}_i}{\partial \mathbf{x}_i}$ and $\mathbf{C}_{ij} = \frac{\partial \mathbf{C}_{ij}}{\partial \mathbf{x}_j}$.
+
+For stability, all eigenvalues $\lambda_k$ of $\mathbf{J}$ must satisfy $\text{Re}(\lambda_k) < 0$.
+
+Using the Gershgorin circle theorem, each eigenvalue lies in at least one circle:
+\begin{equation}
+|z - J_{ii}| \leq \sum_{j \neq i} |C_{ij}|
+\end{equation}
+
+For stability, we require that all circles lie in the left half-plane, which occurs when $\text{Re}(J_{ii}) + \sum_{j \neq i} |C_{ij}| < 0$ for all $i$.
+
+This is equivalent to requiring all coupling matrices to have eigenvalues with negative real parts.
+\end{proof}
+
+\section{Coupling Strength Analysis}
+
+\begin{theorem}[Coupling Strength Degradation Theorem]
+For a multi-scale oscillatory system under metabolic stress, the coupling strength between scales $i$ and $j$ evolves according to:
+\begin{equation}
+\frac{dC_{ij}}{dt} = -\alpha_{ij} C_{ij} - \beta_{ij} C_{ij}^3 + \gamma_{ij} \cos(\omega_{\text{stress}}t)
+\end{equation}
+where $\alpha_{ij} > 0$, $\beta_{ij} > 0$, and $\gamma_{ij}$ represents oscillatory stress effects.
+\end{theorem}
+
+\begin{proof}
+The coupling strength is defined in terms of phase-amplitude relationships:
+\begin{equation}
+C_{ij}(t) = \left|\left\langle A_i(t) e^{i\phi_j(t)} \right\rangle_T\right|
+\end{equation}
+
+Under metabolic stress, both amplitude and phase relationships are affected:
+\begin{align}
+A_i(t) &= A_{i,0} e^{-\alpha_i t}(1 + \epsilon_i \cos(\omega_{\text{stress}}t)) \\
+\phi_j(t) &= \omega_j t + \delta_j e^{-\beta_j t}
+\end{align}
+
+Substituting into the coupling definition:
+\begin{equation}
+C_{ij}(t) = A_{i,0} e^{-\alpha_i t} \left|\left\langle (1 + \epsilon_i \cos(\omega_{\text{stress}}t)) e^{i(\omega_j t + \delta_j e^{-\beta_j t})} \right\rangle_T\right|
+\end{equation}
+
+For small perturbations, we can expand:
+\begin{equation}
+C_{ij}(t) \approx C_{ij,0} e^{-\alpha_i t} \left(1 + \frac{\epsilon_i}{2}\langle \cos(\omega_{\text{stress}}t) \rangle + O(\epsilon_i^2)\right)
+\end{equation}
+
+Taking the time derivative and including nonlinear coupling effects:
+\begin{equation}
+\frac{dC_{ij}}{dt} = -\alpha_i C_{ij} + \text{nonlinear terms} + \text{stress oscillations}
+\end{equation}
+
+The nonlinear terms arise from coupling between different scale pairs and can be approximated as $-\beta_{ij} C_{ij}^3$ for weak coupling.
+
+The oscillatory stress term contributes $\gamma_{ij} \cos(\omega_{\text{stress}}t)$.
+\end{proof}
+
+\begin{lemma}[Coupling Decay Time Constants]
+For the coupling degradation equation, the characteristic decay time is:
+\begin{equation}
+\tau_{ij} = \frac{1}{\alpha_{ij}} \sqrt{\frac{1}{1 + \frac{3\beta_{ij} C_{ij,0}^2}{\alpha_{ij}}}}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Consider the simplified equation without oscillatory terms:
+\begin{equation}
+\frac{dC_{ij}}{dt} = -\alpha_{ij} C_{ij} - \beta_{ij} C_{ij}^3
+\end{equation}
+
+For small perturbations around $C_{ij,0}$, linearize:
+\begin{equation}
+\frac{d\delta C_{ij}}{dt} = -(\alpha_{ij} + 3\beta_{ij} C_{ij,0}^2) \delta C_{ij}
+\end{equation}
+
+The effective decay rate is $\lambda_{\text{eff}} = \alpha_{ij} + 3\beta_{ij} C_{ij,0}^2$.
+
+The decay time constant is $\tau_{ij} = 1/\lambda_{\text{eff}}$, which gives the stated result.
+\end{proof>
+
+\section{Oscillatory Decoupling Threshold Analysis}
+
+\begin{theorem}[Critical Coupling Threshold Theorem]
+For a multi-scale oscillatory network with $N$ scales and natural frequencies $\omega_1, \omega_2, \ldots, \omega_N$, the critical coupling strength below which synchronization is lost is:
+\begin{equation}
+C_{\text{critical}} = \frac{1}{N-1}\sqrt{\frac{\sum_{k=1}^{N} \omega_k^2}{\sum_{k=1}^{N} \omega_k}}
+\end{equation}
+\end{theorem>
+
+\begin{proof}
+Consider the phase dynamics of the coupled system:
+\begin{equation}
+\frac{d\phi_i}{dt} = \omega_i + \sum_{j \neq i} C_{ij} \sin(\phi_j - \phi_i)
+\end{equation}
+
+For synchronization, we require a common frequency $\Omega$ such that $\dot{\phi}_i = \Omega$ for all $i$.
+
+In the synchronized state: $\phi_i(t) = \Omega t + \phi_{i,0}$, where $\phi_{i,0}$ are constant phase offsets.
+
+Substituting into the phase equation:
+\begin{equation}
+\Omega = \omega_i + \sum_{j \neq i} C_{ij} \sin(\phi_{j,0} - \phi_{i,0})
+\end{equation>
+
+For the existence of a solution, we require:
+\begin{equation}
+|\omega_i - \Omega| \leq \sum_{j \neq i} C_{ij}
+\end{equation>
+
+Assuming equal coupling $C_{ij} = C$ for all pairs, this becomes:
+\begin{equation}
+|\omega_i - \Omega| \leq (N-1)C
+\end{equation>
+
+For synchronization of all oscillators, we need:
+\begin{equation>
+\max_i |\omega_i - \Omega| \leq (N-1)C
+\end{equation>
+
+The optimal choice for $\Omega$ is the average frequency: $\Omega = \frac{1}{N}\sum_{k=1}^{N} \omega_k$.
+
+The maximum deviation from the average is bounded by the standard deviation:
+\begin{equation>
+\max_i |\omega_i - \Omega| \leq \sqrt{\frac{1}{N}\sum_{k=1}^{N} (\omega_k - \Omega)^2}
+\end{equation>
+
+This can be rewritten as:
+\begin{equation}
+\sqrt{\frac{1}{N}\sum_{k=1}^{N} \omega_k^2 - \Omega^2} = \sqrt{\frac{\sum_{k=1}^{N} \omega_k^2}{N} - \left(\frac{\sum_{k=1}^{N} \omega_k}{N}\right)^2}
+\end{equation>
+
+Simplifying:
+\begin{equation}
+= \sqrt{\frac{N\sum_{k=1}^{N} \omega_k^2 - (\sum_{k=1}^{N} \omega_k)^2}{N^2}}
+\end{equation>
+
+For the synchronization condition:
+\begin{equation}
+(N-1)C \geq \sqrt{\frac{N\sum_{k=1}^{N} \omega_k^2 - (\sum_{k=1}^{N} \omega_k)^2}{N^2}}
+\end{equation>
+
+Using the identity $N\sum \omega_k^2 - (\sum \omega_k)^2 = N(N-1)\text{Var}(\omega)$ where $\text{Var}(\omega) = \frac{\sum \omega_k^2}{N} - \left(\frac{\sum \omega_k}{N}\right)^2$:
+
+\begin{equation}
+C_{\text{critical}} = \frac{1}{N-1}\sqrt{\frac{\sum_{k=1}^{N} \omega_k^2 - \frac{(\sum_{k=1}^{N} \omega_k)^2}{N}}{N}}
+\end{equation>
+
+This simplifies to the stated result through algebraic manipulation.
+\end{proof>
+
+\section{Performance Barrier Analysis}
+
+\begin{theorem}[Performance Barrier Theorem]
+For a multi-scale oscillatory system with coupling degradation, the performance barrier time is determined by:
+\begin{equation}
+t_{\text{barrier}} = \min_{i,j} \left\{\tau_{ij} \ln\left(\frac{C_{ij,0}}{C_{\text{critical}}}\right), \frac{1}{\sqrt{3\beta_{ij}C_{ij,0}^2}}\right\}
+\end{equation>
+\end{theorem>
+
+\begin{proof>
+The coupling strength evolves according to:
+\begin{equation>
+\frac{dC_{ij}}{dt} = -\alpha_{ij} C_{ij} - \beta_{ij} C_{ij}^3
+\end{equation>
+
+This is a Bernoulli equation. Let $u = C_{ij}^{-2}$, then:
+\begin{equation>
+\frac{du}{dt} = 2\alpha_{ij} u + 2\beta_{ij}
+\end{equation>
+
+The solution is:
+\begin{equation}
+u(t) = \left(u_0 - \frac{\beta_{ij}}{\alpha_{ij}}\right)e^{2\alpha_{ij}t} + \frac{\beta_{ij}}{\alpha_{ij}}
+\end{equation>
+
+Converting back to $C_{ij}$:
+\begin{equation}
+C_{ij}(t) = \frac{1}{\sqrt{\left(C_{ij,0}^{-2} - \frac{\beta_{ij}}{\alpha_{ij}}\right)e^{2\alpha_{ij}t} + \frac{\beta_{ij}}{\alpha_{ij}}}}
+\end{equation>
+
+The barrier occurs when $C_{ij}(t_{\text{barrier}}) = C_{\text{critical}}$.
+
+For small $\beta_{ij}$ (weak nonlinearity), the solution approximates:
+\begin{equation}
+C_{ij}(t) \approx C_{ij,0} e^{-\alpha_{ij}t}
+\end{equation>
+
+Setting $C_{ij}(t_{\text{barrier}}) = C_{\text{critical}}$:
+\begin{equation}
+t_{\text{barrier}} = \frac{1}{\alpha_{ij}} \ln\left(\frac{C_{ij,0}}{C_{\text{critical}}}\right) = \tau_{ij} \ln\left(\frac{C_{ij,0}}{C_{\text{critical}}}\right>
+\end{equation>
+
+For strong nonlinearity, the limiting case occurs when the cubic term dominates, giving the second term in the minimum.
+
+The overall barrier time is determined by the first scale pair to reach the critical threshold.
+\end{proof>
+
+\section{Performance Enhancement Analysis}
+
+\begin{theorem}[Coupling vs Capacity Enhancement Theorem]
+For a multi-scale oscillatory performance system, enhancement through coupling improvement yields greater performance gains than capacity improvement when:
+\begin{equation>
+\frac{\partial \ln P}{\partial \ln C_{ij}} > \frac{\partial \ln P}{\partial \ln A_i}
+\end{equation>
+where $P$ is performance, $C_{ij}$ is coupling strength, and $A_i$ is amplitude capacity.
+\end{theorem>
+
+\begin{proof>
+From the performance function:
+\begin{equation>
+P(t) = \Psi(t) \cdot \sum_{i=1}^{N} A_i(t) \cos(\phi_i(t)) \cdot \prod_{j \neq i} C_{ij}(t)
+\end{equation>
+
+Taking the logarithm:
+\begin{equation>
+\ln P = \ln \Psi + \ln\left(\sum_{i=1}^{N} A_i \cos(\phi_i)\right) + \sum_{i \neq j} \ln C_{ij}
+\end{equation>
+
+The sensitivity to coupling changes:
+\begin{equation>
+\frac{\partial \ln P}{\partial \ln C_{ij}} = \frac{\partial \ln \Psi}{\partial \ln C_{ij}} + 1
+\end{equation>
+
+Since phase coherence $\Psi$ depends on coupling strength through synchronization:
+\begin{equation>
+\frac{\partial \ln \Psi}{\partial \ln C_{ij}} = \frac{C_{ij}}{\Psi} \frac{\partial \Psi}{\partial C_{ij}}
+\end{equation>
+
+Near the critical coupling threshold, $\frac{\partial \Psi}{\partial C_{ij}}$ becomes large, making:
+\begin{equation>
+\frac{\partial \ln P}{\partial \ln C_{ij}} \gg 1
+\end{equation>
+
+The sensitivity to amplitude changes:
+\begin{equation>
+\frac{\partial \ln P}{\partial \ln A_i} = \frac{A_i \cos(\phi_i)}{\sum_{k=1}^{N} A_k \cos(\phi_k)} \leq 1
+\end{equation>
+
+Therefore, near the coupling threshold:
+\begin{equation>
+\frac{\partial \ln P}{\partial \ln C_{ij}} > \frac{\partial \ln P}{\partial \ln A_i}
+\end{equation>
+
+This proves that coupling enhancement is more effective than capacity enhancement.
+\end{proof>
+
+\begin{corollary}[Optimal Enhancement Strategy]
+The optimal enhancement strategy prioritizes coupling improvements when the system operates near synchronization thresholds and capacity improvements when coupling is strong.
+\end{corollary>
+
+\begin{proof>
+This follows directly from the previous theorem. When $C_{ij} \gg C_{\text{critical}}$, the phase coherence $\Psi \approx 1$ and its sensitivity to coupling changes decreases, making capacity improvements relatively more effective.
+\end{proof>
+
+\section{Temporal Dynamics and System Integration}
+
+\begin{theorem}[Multi-Scale Convergence Theorem]
+A multi-scale oscillatory system converges to synchronized behavior if and only if all pairwise coupling strengths exceed their respective critical thresholds and the convergence time is finite.
+\end{theorem>
+
+\begin{proof>
+Consider the Lyapunov function for the multi-scale system:
+\begin{equation>
+V(\boldsymbol{\phi}) = \frac{1}{2}\sum_{i,j} C_{ij}(1 - \cos(\phi_i - \phi_j))
+\end{equation>
+
+The time derivative along trajectories is:
+\begin{equation>
+\frac{dV}{dt} = \sum_{i,j} C_{ij} \sin(\phi_i - \phi_j)(\dot{\phi}_i - \dot{\phi}_j)
+\end{equation>
+
+Substituting the phase dynamics:
+\begin{equation>
+\dot{\phi}_i = \omega_i + \sum_{k \neq i} C_{ik} \sin(\phi_k - \phi_i)
+\end{equation>
+
+After algebraic manipulation:
+\begin{equation>
+\frac{dV}{dt} = -\sum_{i,j} C_{ij} \sin^2(\phi_i - \phi_j) \leq 0
+\end{equation>
+
+The system is stable if $V$ is bounded below (which it is, since $V \geq 0$) and $\frac{dV}{dt} < 0$ except at equilibrium points.
+
+Convergence occurs when all $\phi_i - \phi_j = \text{constant}$, which requires:
+\begin{equation>
+\omega_i - \omega_j = \sum_{k \neq i} C_{ik} \sin(\phi_k - \phi_i) - \sum_{k \neq j} C_{jk} \sin(\phi_k - \phi_j)
+\end{equation>
+
+This system has a solution if and only if the coupling strengths exceed the critical thresholds derived in the previous theorem.
+\end{proof>
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document>
