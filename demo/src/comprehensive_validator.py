@@ -15,8 +15,9 @@ Modules validated:
 - Circulatory Systems (Heart rate variability, blood pressure, cardiovascular coupling)
 - Neural Oscillations (Brain waves, cognitive processing, neuromuscular control)
 - Sleep & Circadian Rhythms (Sleep architecture, circadian coupling, consciousness)
+- Consciousness Framework (Quantum substrate, BMD frame selection, multi-scale coupling, fire-evolution)
 
-This system validates ALL theoretical predictions across ALL 10 biological scales!
+This system validates ALL theoretical predictions across ALL 11 biological scales!
 """
 
 import sys
@@ -41,6 +42,7 @@ from neural.oscillatory_neural_validator import NeuralOscillatoryValidator
 from respiratory.oscillatory_respiratory_validator import RespiratoryOscillatoryValidator
 from metabolic.oscillatory_metabolic_validator import MetabolicOscillatoryValidator
 from sleep.oscillatory_sleep_validator import SleepOscillatoryValidator
+from consciousness.comprehensive_consciousness_validator import ComprehensiveConsciousnessValidator
 
 class ComprehensiveUniversalValidator:
     """
@@ -53,7 +55,7 @@ class ComprehensiveUniversalValidator:
         
         # Create subdirectories for each domain
         domains = ['genome', 'intracellular', 'membrane', 'physics', 'tissue', 
-                  'circulatory', 'neural', 'respiratory', 'metabolic', 'sleep']
+                  'circulatory', 'neural', 'respiratory', 'metabolic', 'sleep', 'consciousness']
         for domain in domains:
             (self.results_dir / domain).mkdir(exist_ok=True)
         
@@ -68,7 +70,8 @@ class ComprehensiveUniversalValidator:
             'neural': NeuralOscillatoryValidator(str(self.results_dir / 'neural')),
             'respiratory': RespiratoryOscillatoryValidator(str(self.results_dir / 'respiratory')),
             'metabolic': MetabolicOscillatoryValidator(str(self.results_dir / 'metabolic')),
-            'sleep': SleepOscillatoryValidator(str(self.results_dir / 'sleep'))
+            'sleep': SleepOscillatoryValidator(str(self.results_dir / 'sleep')),
+            'consciousness': ComprehensiveConsciousnessValidator(str(self.results_dir / 'consciousness'))
         }
         
         self.domain_results = {}
@@ -78,7 +81,7 @@ class ComprehensiveUniversalValidator:
         
         print("🌟 COMPREHENSIVE UNIVERSAL BIOLOGICAL OSCILLATORY FRAMEWORK VALIDATOR 🌟")
         print("=" * 80)
-        print("This system validates ALL theoretical predictions across ALL biological scales!")
+        print("This system validates ALL theoretical predictions across ALL 11 biological scales!")
         print("=" * 80)
     
     def run_complete_validation(self):
@@ -100,7 +103,8 @@ class ComprehensiveUniversalValidator:
             ('respiratory', "🫁 RESPIRATORY DYNAMICS"),
             ('circulatory', "🫀 CIRCULATORY SYSTEMS"),
             ('neural', "🧠 NEURAL OSCILLATIONS"),
-            ('sleep', "💤 SLEEP & CIRCADIAN RHYTHMS")
+            ('sleep', "💤 SLEEP & CIRCADIAN RHYTHMS"),
+            ('consciousness', "🌟 CONSCIOUSNESS FRAMEWORK")
         ]
         
         validation_success = {}
@@ -133,6 +137,8 @@ class ComprehensiveUniversalValidator:
                     results = validator.run_all_experiments()
                 elif domain == 'sleep':
                     results = validator.run_all_experiments()
+                elif domain == 'consciousness':
+                    results = validator.run_comprehensive_validation()
                 
                 self.domain_results[domain] = results
                 validation_success[domain] = self._assess_domain_validation(domain, results)
@@ -248,6 +254,12 @@ class ComprehensiveUniversalValidator:
         
         elif domain == 'sleep':
             return results.get('overall_validation_success', False)
+        
+        elif domain == 'consciousness':
+            # Check comprehensive consciousness validation summary
+            summary = results.get('comprehensive_summary', {})
+            overall_framework = summary.get('overall_framework_validation', {})
+            return overall_framework.get('comprehensive_validation_success', False)
         
         return False
     
@@ -697,7 +709,7 @@ class ComprehensiveUniversalValidator:
             f.write("## Domain Validation Results\n\n")
             
             for domain in ['physics', 'membrane', 'intracellular', 'genome', 'tissue', 
-                          'circulatory', 'neural', 'respiratory', 'metabolic', 'sleep']:
+                          'circulatory', 'neural', 'respiratory', 'metabolic', 'sleep', 'consciousness']:
                 if domain in self.domain_results:
                     domain_success = self._assess_domain_validation(domain, self.domain_results[domain])
                     f.write(f"### {domain.title()} Domain\n")
@@ -775,6 +787,17 @@ class ComprehensiveUniversalValidator:
                         successful_exp = results.get('successful_validations', 0)
                         f.write(f"- Experiments: {successful_exp}/{total_exp} validated\n")
                         f.write(f"- Domain: {results.get('domain', 'Sleep and Circadian System Oscillations')}\n")
+                    
+                    elif domain == 'consciousness':
+                        summary = results.get('comprehensive_summary', {})
+                        individual = summary.get('individual_components', {})
+                        integration = summary.get('component_integration', {})
+                        predictions = summary.get('consciousness_predictions', {})
+                        
+                        f.write(f"- Individual Components: {individual.get('components_validated', 0)}/{individual.get('total_components', 4)} validated\n")
+                        f.write(f"- Component Integration: {integration.get('tests_passed', 0)}/{integration.get('total_tests', 5)} tests passed\n")
+                        f.write(f"- Consciousness Predictions: {predictions.get('predictions_passed', 0)}/{predictions.get('total_predictions', 5)} validated\n")
+                        f.write(f"- Framework Status: {'✅ COMPREHENSIVE SUCCESS' if summary.get('overall_framework_validation', {}).get('comprehensive_validation_success', False) else '❌ INCOMPLETE'}\n")
                     
                     f.write("\n")
             
