@@ -5,13 +5,18 @@ This is the master validation system that coordinates all specialized biological
 domain validators to provide complete validation of the oscillatory framework.
 
 Modules validated:
-- Genome Oscillatory Dynamics (DNA library, St-Stella's sequences, evolution)
-- Intracellular Dynamics (Hierarchical circuits, ATP constraints, metabolism)
-- Membrane Dynamics (ENAQT, quantum computers, transport)
 - Physics Foundations (Bounded systems, S-entropy, universal constants)
+- Membrane Dynamics (ENAQT, quantum computers, transport)
+- Intracellular Dynamics (Hierarchical circuits, ATP constraints, metabolism)
+- Genome Oscillatory Dynamics (DNA library, St-Stella's sequences, evolution)
 - Tissue Dynamics (Cell communication, morphogenesis, mechanotransduction)
+- Metabolic Oscillations (Glycolysis, ATP production, metabolic networks)
+- Respiratory Dynamics (Breathing rhythms, gas exchange, atmospheric coupling)
+- Circulatory Systems (Heart rate variability, blood pressure, cardiovascular coupling)
+- Neural Oscillations (Brain waves, cognitive processing, neuromuscular control)
+- Sleep & Circadian Rhythms (Sleep architecture, circadian coupling, consciousness)
 
-This system validates ALL theoretical predictions across ALL biological scales!
+This system validates ALL theoretical predictions across ALL 10 biological scales!
 """
 
 import sys
@@ -31,6 +36,11 @@ from intracellular.oscillatory_intracellular_validator import IntracellularOscil
 from membrane.oscillatory_membrane_validator import MembraneOscillatoryValidator
 from physics.oscillatory_physics_validator import PhysicsOscillatoryValidator
 from tissue.oscillatory_tissue_validator import TissueOscillatoryValidator
+from circulatory.oscillatory_circulatory_validator import CirculatoryOscillatoryValidator
+from neural.oscillatory_neural_validator import NeuralOscillatoryValidator
+from respiratory.oscillatory_respiratory_validator import RespiratoryOscillatoryValidator
+from metabolic.oscillatory_metabolic_validator import MetabolicOscillatoryValidator
+from sleep.oscillatory_sleep_validator import SleepOscillatoryValidator
 
 class ComprehensiveUniversalValidator:
     """
@@ -42,7 +52,8 @@ class ComprehensiveUniversalValidator:
         self.results_dir.mkdir(exist_ok=True)
         
         # Create subdirectories for each domain
-        domains = ['genome', 'intracellular', 'membrane', 'physics', 'tissue']
+        domains = ['genome', 'intracellular', 'membrane', 'physics', 'tissue', 
+                  'circulatory', 'neural', 'respiratory', 'metabolic', 'sleep']
         for domain in domains:
             (self.results_dir / domain).mkdir(exist_ok=True)
         
@@ -52,7 +63,12 @@ class ComprehensiveUniversalValidator:
             'intracellular': IntracellularOscillatoryValidator(str(self.results_dir / 'intracellular')),
             'membrane': MembraneOscillatoryValidator(str(self.results_dir / 'membrane')),
             'physics': PhysicsOscillatoryValidator(str(self.results_dir / 'physics')),
-            'tissue': TissueOscillatoryValidator(str(self.results_dir / 'tissue'))
+            'tissue': TissueOscillatoryValidator(str(self.results_dir / 'tissue')),
+            'circulatory': CirculatoryOscillatoryValidator(str(self.results_dir / 'circulatory')),
+            'neural': NeuralOscillatoryValidator(str(self.results_dir / 'neural')),
+            'respiratory': RespiratoryOscillatoryValidator(str(self.results_dir / 'respiratory')),
+            'metabolic': MetabolicOscillatoryValidator(str(self.results_dir / 'metabolic')),
+            'sleep': SleepOscillatoryValidator(str(self.results_dir / 'sleep'))
         }
         
         self.domain_results = {}
@@ -76,10 +92,15 @@ class ComprehensiveUniversalValidator:
         # Domain validation order (from fundamental to complex)
         validation_order = [
             ('physics', "⚛️ PHYSICS FOUNDATIONS"),
-            ('membrane', "🧬 MEMBRANE DYNAMICS"),
+            ('membrane', "🧬 MEMBRANE DYNAMICS"), 
             ('intracellular', "⚡ INTRACELLULAR DYNAMICS"),
             ('genome', "🧬 GENOME DYNAMICS"),
-            ('tissue', "🧪 TISSUE DYNAMICS")
+            ('tissue', "🧪 TISSUE DYNAMICS"),
+            ('metabolic', "🍯 METABOLIC OSCILLATIONS"),
+            ('respiratory', "🫁 RESPIRATORY DYNAMICS"),
+            ('circulatory', "🫀 CIRCULATORY SYSTEMS"),
+            ('neural', "🧠 NEURAL OSCILLATIONS"),
+            ('sleep', "💤 SLEEP & CIRCADIAN RHYTHMS")
         ]
         
         validation_success = {}
@@ -102,6 +123,16 @@ class ComprehensiveUniversalValidator:
                     results = validator.run_comprehensive_physics_validation()
                 elif domain == 'tissue':
                     results = validator.run_comprehensive_tissue_validation()
+                elif domain == 'circulatory':
+                    results = validator.run_all_experiments()
+                elif domain == 'neural':
+                    results = validator.run_all_experiments()
+                elif domain == 'respiratory':
+                    results = validator.run_all_experiments()
+                elif domain == 'metabolic':
+                    results = validator.run_all_experiments()
+                elif domain == 'sleep':
+                    results = validator.run_all_experiments()
                 
                 self.domain_results[domain] = results
                 validation_success[domain] = self._assess_domain_validation(domain, results)
@@ -202,6 +233,21 @@ class ComprehensiveUniversalValidator:
                 results.get('morphogenetic_patterns', {}).get('morphogenetic_validated', False) and
                 results.get('mechanotransduction_oscillations', {}).get('mechanotransduction_validated', False)
             )
+        
+        elif domain == 'circulatory':
+            return results.get('overall_validation_success', False)
+        
+        elif domain == 'neural':
+            return results.get('overall_validation_success', False)
+        
+        elif domain == 'respiratory':
+            return results.get('overall_validation_success', False)
+        
+        elif domain == 'metabolic':
+            return results.get('overall_validation_success', False)
+        
+        elif domain == 'sleep':
+            return results.get('overall_validation_success', False)
         
         return False
     
@@ -650,7 +696,8 @@ class ComprehensiveUniversalValidator:
             
             f.write("## Domain Validation Results\n\n")
             
-            for domain in ['physics', 'membrane', 'intracellular', 'genome', 'tissue']:
+            for domain in ['physics', 'membrane', 'intracellular', 'genome', 'tissue', 
+                          'circulatory', 'neural', 'respiratory', 'metabolic', 'sleep']:
                 if domain in self.domain_results:
                     domain_success = self._assess_domain_validation(domain, self.domain_results[domain])
                     f.write(f"### {domain.title()} Domain\n")
@@ -698,6 +745,36 @@ class ComprehensiveUniversalValidator:
                         if 'mechanotransduction_oscillations' in results:
                             wave_speed = results['mechanotransduction_oscillations'].get('wave_speed', 0)
                             f.write(f"- Mechanical Wave Speed: {wave_speed:.2e} m/s\n")
+                    
+                    elif domain == 'circulatory':
+                        total_exp = results.get('total_experiments', 0)
+                        successful_exp = results.get('successful_validations', 0)
+                        f.write(f"- Experiments: {successful_exp}/{total_exp} validated\n")
+                        f.write(f"- Domain: {results.get('domain', 'Circulatory System Oscillations')}\n")
+                    
+                    elif domain == 'neural':
+                        total_exp = results.get('total_experiments', 0)
+                        successful_exp = results.get('successful_validations', 0)
+                        f.write(f"- Experiments: {successful_exp}/{total_exp} validated\n")
+                        f.write(f"- Domain: {results.get('domain', 'Neural System Oscillations')}\n")
+                    
+                    elif domain == 'respiratory':
+                        total_exp = results.get('total_experiments', 0)
+                        successful_exp = results.get('successful_validations', 0)
+                        f.write(f"- Experiments: {successful_exp}/{total_exp} validated\n")
+                        f.write(f"- Domain: {results.get('domain', 'Respiratory System Oscillations')}\n")
+                    
+                    elif domain == 'metabolic':
+                        total_exp = results.get('total_experiments', 0)
+                        successful_exp = results.get('successful_validations', 0)
+                        f.write(f"- Experiments: {successful_exp}/{total_exp} validated\n")
+                        f.write(f"- Domain: {results.get('domain', 'Metabolic System Oscillations')}\n")
+                    
+                    elif domain == 'sleep':
+                        total_exp = results.get('total_experiments', 0)
+                        successful_exp = results.get('successful_validations', 0)
+                        f.write(f"- Experiments: {successful_exp}/{total_exp} validated\n")
+                        f.write(f"- Domain: {results.get('domain', 'Sleep and Circadian System Oscillations')}\n")
                     
                     f.write("\n")
             
