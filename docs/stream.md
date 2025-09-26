@@ -1,4 +1,8 @@
-# Biological Oscillatory Framework - Core Theoretical Foundations
+<h1 align="center">Huygens</h1>
+
+<p align="center">
+  <img src="assets/img/Christiaan_Huygens-painting.jpeg" alt="Logo" width="300"/>
+</p>
 
 Based on the mathematical and physical foundations developed in the accompanying papers, this document outlines the key theoretical concepts relevant to building a quantitative Rust-based framework for biological oscillations.
 
