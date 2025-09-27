@@ -1,0 +1,22 @@
+{
+  "running_freising": {
+    "watch_primary": "experimental-data/gait/gait_cycle_track.json",
+    "smart_shoes": "experimental-data/gait/combined_time_series.json"
+  },
+  "curve_running_lane3": {
+    "watch_primary": "experimental-data/curves/curve_biomechanics.json",
+    "smart_shoes": "experimental-data/curves/centrifugal_forces.json"
+  },
+  "curve_running_lane4": {
+    "watch_primary": "experimental-data/curves/pennation_angle.json",
+    "smart_ring": "experimental-data/stability/com.json"
+  },
+  "stability_analysis": {
+    "watch_primary": "experimental-data/stability/control_loop.json", 
+    "smart_ring": "experimental-data/stability/damped.json"
+  },
+  "knee_biomechanics": {
+    "smart_shoes": "experimental-data/knee/knee_angle.json",
+    "watch_secondary": "experimental-data/knee/knee_muscle_tendon_mechanics.json"
+  }
+}
