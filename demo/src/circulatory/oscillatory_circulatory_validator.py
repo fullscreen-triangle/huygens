@@ -45,7 +45,7 @@ class CirculatoryOscillatoryValidator:
             'very_low': (0.003, 0.04),      # Renin-angiotensin system
             'low': (0.04, 0.15),            # Baroreceptor control
             'high': (0.15, 0.40),           # Respiratory coupling
-            'very_high': (0.40, 2.0)        # Cardiac dynamics
+            'very_high': (0.40, 1.5)        # Cardiac dynamics (reduced to stay below Nyquist)
         }
         
         self.validation_results = {}
@@ -64,7 +64,7 @@ class CirculatoryOscillatoryValidator:
         
         # Simulation parameters
         duration = 300  # 5 minutes
-        fs = 4.0  # 4 Hz sampling
+        fs = 8.0  # 8 Hz sampling (increased to accommodate all frequency bands)
         t = np.linspace(0, duration, int(duration * fs))
         
         # Generate multi-scale oscillatory components
@@ -107,31 +107,43 @@ class CirculatoryOscillatoryValidator:
         
         # Extract power in different frequency bands
         band_powers = {}
-        total_power = np.trapz(psd, freqs)
+        total_power = np.trapezoid(psd, freqs)
         
         for band_name, (f_min, f_max) in self.frequency_bands.items():
             band_mask = (freqs >= f_min) & (freqs <= f_max)
             if np.any(band_mask):
-                band_power = np.trapz(psd[band_mask], freqs[band_mask])
+                band_power = np.trapezoid(psd[band_mask], freqs[band_mask])
                 band_powers[band_name] = band_power / total_power * 100  # Percentage
             else:
                 band_powers[band_name] = 0
         
         # Coupling analysis between frequency bands
         coupling_coefficients = {}
+        nyquist_freq = fs / 2
+        
         for i, (band1, (f1_min, f1_max)) in enumerate(self.frequency_bands.items()):
             for j, (band2, (f2_min, f2_max)) in enumerate(self.frequency_bands.items()):
                 if i < j:  # Avoid duplicate pairs
-                    # Extract signals in each band
-                    b1, a1 = signal.butter(4, [f1_min, f1_max], btype='band', fs=fs)
-                    b2, a2 = signal.butter(4, [f2_min, f2_max], btype='band', fs=fs)
-                    
-                    sig1 = signal.filtfilt(b1, a1, rr_intervals)
-                    sig2 = signal.filtfilt(b2, a2, rr_intervals)
-                    
-                    # Calculate coupling strength (correlation)
-                    coupling = np.corrcoef(sig1, sig2)[0, 1]
-                    coupling_coefficients[f"{band1}_{band2}"] = coupling
+                    try:
+                        # Check if frequencies are within valid range
+                        if f1_max >= nyquist_freq or f2_max >= nyquist_freq:
+                            print(f"Warning: Skipping {band1}-{band2} coupling - frequencies exceed Nyquist limit")
+                            continue
+                        
+                        # Extract signals in each band
+                        b1, a1 = signal.butter(4, [f1_min, f1_max], btype='band', fs=fs)
+                        b2, a2 = signal.butter(4, [f2_min, f2_max], btype='band', fs=fs)
+                        
+                        sig1 = signal.filtfilt(b1, a1, rr_intervals)
+                        sig2 = signal.filtfilt(b2, a2, rr_intervals)
+                        
+                        # Calculate coupling strength (correlation)
+                        coupling = np.corrcoef(sig1, sig2)[0, 1]
+                        if not np.isnan(coupling):
+                            coupling_coefficients[f"{band1}_{band2}"] = coupling
+                    except ValueError as e:
+                        print(f"Warning: Could not compute {band1}-{band2} coupling: {e}")
+                        continue
         
         # Theoretical predictions validation
         theoretical_predictions = {
@@ -256,8 +268,8 @@ class CirculatoryOscillatoryValidator:
         
         # Identify Mayer waves (0.08-0.12 Hz)
         mayer_mask = (freqs >= 0.08) & (freqs <= 0.12)
-        mayer_power = np.trapz(bp_psd[mayer_mask], freqs[mayer_mask])
-        total_bp_power = np.trapz(bp_psd, freqs)
+        mayer_power = np.trapezoid(bp_psd[mayer_mask], freqs[mayer_mask])
+        total_bp_power = np.trapezoid(bp_psd, freqs)
         mayer_wave_strength = mayer_power / total_bp_power
         
         # Cross-coupling analysis between HR and BP
