@@ -28,6 +28,7 @@ from oscillatory_simulations import (
     create_real_time_visualization
 )
 from experimental_data.experimental_biometric_validator import ExperimentalBiometricValidator
+from sleep_activity_oscillatory_mirror_validator import ActivitySleepOscillatoryMirrorValidator
 
 def run_quick_validation():
     """Run quick validation with essential components"""
@@ -559,6 +560,81 @@ def run_experimental_biometric_validation():
         print("  - Include relevant data columns (heart_rate, sleep_stage, etc.)")
         return None
 
+
+def run_activity_sleep_mirror_validation():
+    """Run Activity-Sleep Oscillatory Mirror Theory validation with real data"""
+    print("\n🌙⚡ ACTIVITY-SLEEP OSCILLATORY MIRROR VALIDATION")
+    print("=" * 60)
+    print("🧬 REVOLUTIONARY: First validation of metabolic error-cleanup coupling!")
+    
+    try:
+        # Check if experimental data directory exists
+        experimental_data_dir = Path("../experimental-data")
+        
+        if not experimental_data_dir.exists():
+            print(f"\n❌ Experimental data directory not found: {experimental_data_dir.resolve()}")
+            print("Please ensure your biometric data is placed in the experimental-data directory")
+            return None
+        
+        print(f"\n📂 Found experimental data directory: {experimental_data_dir}")
+        
+        # Initialize activity-sleep validator
+        validator = ActivitySleepOscillatoryMirrorValidator(
+            results_dir="activity_sleep_mirror_results"
+        )
+        
+        # Try to load real activity and sleep data
+        activity_path = experimental_data_dir / "actigraphy" / "activity.json"
+        sleep_path = experimental_data_dir / "sleep" / "sleep_summary.json"
+        
+        activity_loaded = False
+        sleep_loaded = False
+        
+        if activity_path.exists():
+            print(f"📊 Loading activity data from: {activity_path}")
+            activity_loaded = validator.load_activity_data(str(activity_path))
+        
+        if sleep_path.exists():
+            print(f"🛌 Loading sleep data from: {sleep_path}")
+            sleep_loaded = validator.load_sleep_data(str(sleep_path))
+        
+        if not activity_loaded or not sleep_loaded:
+            print("⚠️  Some data not found - using synthetic data for demonstration")
+        
+        # Run comprehensive activity-sleep mirror validation
+        print(f"\n🚀 Running Activity-Sleep Oscillatory Mirror Theory validation...")
+        results = validator.run_comprehensive_validation()
+        
+        if results:
+            print(f"\n🎊 ACTIVITY-SLEEP MIRROR VALIDATION COMPLETE!")
+            print(f"📊 Theory Status: {results.get('validation_status', 'Unknown')}")
+            print(f"🎯 Confidence Level: {results.get('theory_validation', {}).get('confidence_level', 'unknown')}")
+            
+            # Display key findings
+            key_findings = results.get('key_discoveries', [])
+            if key_findings:
+                print(f"\n🔬 Key Discoveries:")
+                for i, finding in enumerate(key_findings[:5], 1):
+                    print(f"   {i}. {finding}")
+            
+            # Display clinical implications
+            clinical_implications = results.get('clinical_implications', [])
+            if clinical_implications:
+                print(f"\n🏥 Clinical Implications:")
+                for i, implication in enumerate(clinical_implications[:3], 1):
+                    print(f"   {i}. {implication}")
+            
+            print(f"\n💾 Results saved to: activity_sleep_mirror_results/")
+            return results
+        else:
+            print(f"\n❌ Activity-Sleep Mirror validation failed")
+            return None
+    
+    except Exception as e:
+        print(f"\n❌ Error in Activity-Sleep Mirror validation: {str(e)}")
+        return None
+
+
 def main():
     """Main CLI interface"""
     parser = argparse.ArgumentParser(
@@ -588,12 +664,14 @@ Examples:
                        help='Create visualization gallery')
     parser.add_argument('--experimental', action='store_true',
                        help='Analyze real biometric data (requires experimental-data directory)')
+    parser.add_argument('--activity-sleep', action='store_true',
+                       help='🌙⚡ Validate Activity-Sleep Oscillatory Mirror Theory!')
     parser.add_argument('--all', action='store_true', 
-                       help='Run everything (except dashboard and experimental)')
+                       help='Run everything (except dashboard, experimental, and activity-sleep)')
     
     args = parser.parse_args()
     
-    if not any([args.quick, args.comprehensive, args.domains, args.dashboard, args.demo, args.gallery, args.experimental, args.all]):
+    if not any([args.quick, args.comprehensive, args.domains, args.dashboard, args.demo, args.gallery, args.experimental, args.activity_sleep, args.all]):
         print("🌟 Universal Biological Oscillatory Framework Validation Platform 🌟")
         print("\nAvailable options:")
         print("  --quick          : Quick validation of key components")
@@ -603,7 +681,8 @@ Examples:
         print("  --demo           : Demonstration simulations")
         print("  --gallery        : Visualization gallery")
         print("  --experimental   : 🏃‍♂️💓 Analyze REAL biometric data!")
-        print("  --all            : Run all validations (except experimental)")
+        print("  --activity-sleep : 🌙⚡ Validate Activity-Sleep Mirror Theory!")
+        print("  --all            : Run all validations (except experimental & activity-sleep)")
         print("\nUse --help for more details")
         return
     
@@ -625,14 +704,18 @@ Examples:
     if args.experimental:
         run_experimental_biometric_validation()
     
+    if args.activity_sleep:
+        run_activity_sleep_mirror_validation()
+    
     if args.dashboard:
         run_interactive_dashboard()
     
     if args.all:
         print("\n🌟 ALL VALIDATIONS COMPLETED! 🌟")
         print("Check the generated results directories for detailed output.")
-        print("\nNote: --experimental validation not included in --all")
+        print("\nNote: --experimental and --activity-sleep validations not included in --all")
         print("Use --experimental separately to analyze your biometric data")
+        print("Use --activity-sleep to validate the Revolutionary Mirror Theory!")
 
 if __name__ == "__main__":
     main()
