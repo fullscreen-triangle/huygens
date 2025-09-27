@@ -1,0 +1,56 @@
+{
+  "chest_strap": {
+    "file_path": "experimental-data/gait/gait_cycle_track.json",
+    "column_mapping": {
+      "heart_rate": "heart_rate",
+      "time": "timestamp"
+    },
+    "sensor_info": {
+      "model": "Polar H10",
+      "sampling_rate": 1.0,
+      "measurement_type": "ECG",
+      "expected_accuracy": "±1 bpm"
+    }
+  },
+  "watch_ppg": {
+    "file_path": "experimental-data/gait/combined_time_series.json", 
+    "column_mapping": {
+      "heart_rate": "heart_rate",
+      "time": "timestamp"
+    },
+    "sensor_info": {
+      "model": "Apple Watch / Garmin / Fitbit",
+      "sampling_rate": 1.0,
+      "measurement_type": "PPG",
+      "expected_accuracy": "±3 bpm"
+    }
+  },
+  "smart_ring": {
+    "file_path": "experimental-data/stability/com.json",
+    "column_mapping": {
+      "com_acceleration": "heart_rate",
+      "time": "timestamp"
+    },
+    "sensor_info": {
+      "model": "Oura Ring",
+      "sampling_rate": 1.0,
+      "measurement_type": "PPG",
+      "expected_accuracy": "±2 bpm",
+      "note": "Using COM acceleration as heart rate proxy for demo"
+    }
+  },
+  "fitness_tracker": {
+    "file_path": "experimental-data/curves/centrifugal_forces.json",
+    "column_mapping": {
+      "oxygen_uptake": "heart_rate",
+      "time": "timestamp"
+    },
+    "sensor_info": {
+      "model": "Generic Fitness Tracker",
+      "sampling_rate": 1.0,
+      "measurement_type": "PPG",
+      "expected_accuracy": "±4 bpm",
+      "note": "Using oxygen uptake as heart rate proxy for demo"
+    }
+  }
+}

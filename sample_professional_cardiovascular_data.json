@@ -1,0 +1,64 @@
+{
+  "patient_info": {
+    "age": 35,
+    "gender": "M",
+    "height_cm": 175,
+    "weight_kg": 70,
+    "test_date": "2024-12-27"
+  },
+  "ecg_parameters": {
+    "heart_rate": 72.0,
+    "hrv_rmssd": 35.2,
+    "hrv_sdnn": 45.8,
+    "qrs_duration": 0.098,
+    "pr_interval": 0.156,
+    "qt_interval": 0.384,
+    "p_wave_duration": 0.095,
+    "qt_corrected": 0.412
+  },
+  "echocardiography_results": {
+    "ejection_fraction": 62.0,
+    "stroke_volume": 78.0,
+    "cardiac_output": 5.8,
+    "left_ventricular_mass": 135.0,
+    "left_atrial_volume": 45.0,
+    "e_prime": 12.5,
+    "septal_thickness": 9.2,
+    "posterior_wall_thickness": 8.8
+  },
+  "stress_test_data": {
+    "protocol": "Bruce Protocol",
+    "max_heart_rate_achieved": 185.0,
+    "peak_workload_mets": 12.5,
+    "heart_rate_zones": [72, 95, 125, 155, 180],
+    "lactate_thresholds": [2.0, 4.0],
+    "vo2_values": [15.2, 25.8, 35.4, 45.2, 52.1],
+    "blood_pressure_peak": [180, 85],
+    "recovery_heart_rate_1min": 145,
+    "recovery_heart_rate_2min": 120
+  },
+  "anaerobic_threshold": 156.0,
+  "max_heart_rate": 185.0,
+  "resting_heart_rate": 70.0,
+  "cardiac_output": 5.8,
+  "ejection_fraction": 62.0,
+  "additional_measurements": {
+    "blood_pressure_resting": [120, 80],
+    "cholesterol_total": 185,
+    "cholesterol_ldl": 110,
+    "cholesterol_hdl": 55,
+    "triglycerides": 95,
+    "glucose_fasting": 88,
+    "bmi": 22.9,
+    "body_fat_percentage": 12.5
+  },
+  "clinical_notes": {
+    "overall_assessment": "Excellent cardiovascular health",
+    "risk_factors": "None identified",
+    "recommendations": [
+      "Continue current exercise regimen",
+      "Monitor heart rate during training",
+      "Annual cardiovascular screening"
+    ]
+  }
+}
