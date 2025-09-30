@@ -20,7 +20,7 @@ Institution Name
 
 \begin{abstract}
 The human microbiome exhibits complex oscillatory behavior across multiple temporal scales, from metabolic cycles within individual bacterial cells to circadian rhythms in microbial community composition. Current microbiome analysis typically treats microbial communities as static entities characterized by taxonomic abundance, failing to capture the dynamic oscillatory processes that govern host-microbiome interactions. We present a mathematical framework based on multi-scale oscillatory coupling theory that reframes microbiome analysis from taxonomic classification to oscillatory network dynamics. The framework demonstrates that microbiome health and dysbiosis emerge from coupling relationships between host circadian rhythms, microbial population oscillations, metabolic cycling, and environmental perturbations. Mathematical analysis reveals that microbiome stability depends on maintaining oscillatory synchronization across multiple scales rather than preserving specific taxonomic compositions. Application to longitudinal microbiome data demonstrates improved prediction of dysbiosis development and provides novel insights into the temporal mechanisms underlying host-microbiome homeostasis.
-\end{abstract>
+\end{abstract}
 
 \section{Introduction}
 
@@ -65,18 +65,18 @@ The coupling strength between microbiome scales $i$ and $j$ is:
 \begin{equation}
 C_{ij}(\tau) = \frac{1}{T} \int_0^T \frac{(m_i(t) - \bar{m}_i)(m_j(t+\tau) - \bar{m}_j)}{\sigma_{m_i}\sigma_{m_j}} dt
 \label{eq:microbiome_coupling}
-\end{equation>
+\end{equation}
 where $\tau$ represents time lag and $\sigma_{m_i}$ represents standard deviation of scale $i$.
-\end{definition>
+\end{definition}
 
 \section{Cellular Metabolic Oscillations}
 
 Individual bacterial cells exhibit metabolic oscillations coupled to growth and division cycles \citep{murray2007temporal,kiviet2014stochasticity}.
 
-\begin{align>
+\begin{align}
 \frac{d[ATP]}{dt} &= v_{\text{synth}} - k_{\text{cons}}[ATP] - \alpha_1 \cos(\omega_{\text{growth}}t + \phi_1) \label{eq:atp} \\
 \frac{d[Biomass]}{dt} &= \mu[ATP] - \delta[Biomass] + \beta_1 \sin(\omega_{\text{growth}}t + \phi_1) \label{eq:biomass}
-\end{align>
+\end{align}
 
 The oscillatory terms represent coupling between metabolic state and cell cycle progression.
 
@@ -84,10 +84,10 @@ The oscillatory terms represent coupling between metabolic state and cell cycle 
 
 Microbial populations exhibit oscillatory growth patterns influenced by resource competition \citep{stein2013ecological,coyte2015ecology}.
 
-\begin{equation>
+\begin{equation}
 \frac{dN_i}{dt} = r_i N_i \left(1 - \frac{\sum_j N_j}{K}\right) - \sum_{j \neq i} \alpha_{ij} N_i N_j + \epsilon_i \cos(\omega_{\text{resource}}t + \psi_i)
 \label{eq:population_dynamics}
-\end{equation>
+\end{equation}
 
 where $r_i$ is intrinsic growth rate, $K$ is carrying capacity, $\alpha_{ij}$ represents interspecies competition, and the oscillatory term captures resource fluctuations.
 
@@ -95,10 +95,10 @@ where $r_i$ is intrinsic growth rate, $K$ is carrying capacity, $\alpha_{ij}$ re
 
 Host circadian rhythms modulate microbiome composition through oscillatory mechanisms \citep{thaiss2014transkingdom,liang2015rhythmicity}.
 
-\begin{equation>
+\begin{equation}
 \frac{dM_i}{dt} = g_i M_i + h_i \cos(\omega_{\text{circadian}}t + \phi_{\text{host}}) + \sum_{j \neq i} a_{ij} M_j + \xi_i(t)
 \label{eq:circadian_microbiome}
-\end{equation>
+\end{equation}
 
 where $M_i$ represents abundance of microbial taxa $i$ and $h_i$ captures circadian modulation.
 
@@ -106,12 +106,12 @@ where $M_i$ represents abundance of microbial taxa $i$ and $h_i$ captures circad
 
 \begin{theorem}[Microbiome Dysbiosis Theorem]
 Microbiome dysbiosis occurs when coupling strength between scales falls below critical thresholds:
-\begin{equation>
+\begin{equation}
 \min_{i,j} |C_{ij}(t)| < C_{\text{critical}} = \frac{\sigma_{\text{noise}}}{\text{SNR}_{\text{min}}}
 \label{eq:dysbiosis_threshold}
-\end{equation>
+\end{equation}
 where SNR represents signal-to-noise ratio for oscillatory coupling.
-\end{theorem>
+\end{theorem}
 
 \section{Clinical Applications}
 
@@ -121,12 +121,12 @@ Microbiome oscillatory patterns provide diagnostic biomarkers \citep{pasolli2016
 
 \begin{definition}[Oscillatory Dysbiosis Score]
 Dysbiosis severity is quantified through coupling disruption:
-\begin{equation>
+\begin{equation}
 \text{Dysbiosis Score} = \sum_{i<j} w_{ij} \left|1 - \frac{C_{ij,\text{patient}}}{C_{ij,\text{healthy}}}\right|
 \label{eq:dysbiosis_score}
-\end{equation>
+\end{equation}
 where $w_{ij}$ represents clinical weights for different coupling pairs.
-\end{definition>
+\end{definition}
 
 \section{Validation and Results}
 
@@ -149,14 +149,14 @@ Community-Host & $0.84 \pm 0.06$ & 24 hours \\
 Host-Environmental & $0.59 \pm 0.15$ & 7-14 days \\
 \hline
 \end{tabular}
-\end{table>
+\end{table}
 
 \subsection{Predictive Performance}
 
 Oscillatory coupling analysis demonstrated improved accuracy:
-- Traditional diversity metrics: 68% accuracy for dysbiosis prediction
-- Oscillatory coupling analysis: 84% accuracy for dysbiosis prediction  
-- Combined approach: 91% accuracy with 3-day advance warning
+- Traditional diversity metrics: 68\% accuracy for dysbiosis prediction
+- Oscillatory coupling analysis: 84\% accuracy for dysbiosis prediction  
+- Combined approach: 91\% accuracy with 3-day advance warning
 
 \section{Discussion}
 

@@ -1,0 +1,12 @@
+[
+	{
+	"resting_heart_rate": 52,
+	"heart_rate_variability": 87,
+	"score": 63,
+	"delta_temp": -0.2,
+	"respiratory_rate": 16.6,
+	"deep_sleep_density": 30 ,
+	"rem_sleep_density": 8,
+	"light_sleep_density": 62
+	}
+]

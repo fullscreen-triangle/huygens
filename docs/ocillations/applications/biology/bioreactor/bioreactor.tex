@@ -20,7 +20,7 @@ Institution Name
 
 \begin{abstract}
 Bioreactor systems exhibit complex oscillatory behavior across multiple scales, from metabolic cycles within individual cells to process-level dynamics in reactor operation. Current bioprocess control typically employs static setpoints and traditional PID controllers, failing to capture the dynamic oscillatory processes that govern cellular productivity and reactor performance. We present a mathematical framework based on multi-scale oscillatory coupling theory that reframes bioreactor control from static optimization to dynamic coupling management. The framework demonstrates that optimal bioprocess performance emerges from synchronized oscillatory networks spanning cellular metabolism, population dynamics, reactor mixing, and process control systems. Mathematical analysis reveals that productivity enhancement requires maintaining oscillatory coupling across scales rather than fixed optimal conditions. Application to fed-batch fermentation data demonstrates improved product yields and process stability through coupling-based control strategies that synchronize feeding patterns with cellular oscillatory dynamics.
-\end{abstract>
+\end{abstract}
 
 \section{Introduction}
 
@@ -58,7 +58,7 @@ The bioreactor oscillatory scales are:
 \text{Scale 4: } &\text{Reactor} \quad (T_4 \sim 10^1-10^2 \text{ min}) \label{eq:reactor} \\
 \text{Scale 5: } &\text{Process} \quad (T_5 \sim 10^3-10^4 \text{ min}) \label{eq:process}
 \end{align}
-\end{definition>
+\end{definition}
 
 \subsection{Bioreactor Coupling Quantification}
 
@@ -66,21 +66,21 @@ Coupling between bioreactor scales is characterized through cross-spectral analy
 
 \begin{definition}[Bioreactor Coupling Strength]
 The coupling strength between bioreactor scales $i$ and $j$ is:
-\begin{equation>
+\begin{equation}
 D_{ij}(\omega) = \frac{|S_{ij}(\omega)|^2}{S_{ii}(\omega)S_{jj}(\omega)}
 \label{eq:reactor_coupling}
-\end{equation>
+\end{equation}
 where $S_{ij}(\omega)$ represents the cross-power spectral density and $S_{ii}(\omega)$ represents auto-power spectral density.
-\end{definition>
+\end{definition}
 
 \begin{definition}[Bioprocess Performance Index]
 Bioprocess performance emerges from coupling coherence across scales:
-\begin{equation>
+\begin{equation}
 P_{\text{bioprocess}}(t) = \sum_{i<j} w_{ij} D_{ij}(\omega_{\text{optimal}}) \cdot Y_{ij}(t)
 \label{eq:performance_index}
-\end{equation>
+\end{equation}
 where $w_{ij}$ represents scale-specific weights and $Y_{ij}(t)$ represents yield contributions from coupling pair $i,j$.
-\end{definition>
+\end{definition}
 
 \section{Metabolic Scale Oscillatory Dynamics}
 
@@ -88,11 +88,11 @@ where $w_{ij}$ represents scale-specific weights and $Y_{ij}(t)$ represents yiel
 
 Individual cells exhibit metabolic oscillations through glycolytic and respiratory pathways \citep{danø2001sustained,murray2007temporal}.
 
-\begin{align>
+\begin{align}
 \frac{d[ATP]}{dt} &= v_{\text{gly}} + v_{\text{resp}} - v_{\text{growth}} - v_{\text{maintenance}} \label{eq:atp_balance} \\
 \frac{d[NAD^+]}{dt} &= v_{\text{resp}} - v_{\text{gly}} + \alpha_1 \cos(\omega_{\text{redox}}t + \phi_1) \label{eq:nad_oscillation} \\
 \frac{d[Glc]_{\text{int}}}{dt} &= v_{\text{uptake}} - v_{\text{gly}} + \beta_1 \sin(\omega_{\text{uptake}}t + \phi_2) \label{eq:glucose_dynamics}
-\end{align>
+\end{align}
 
 The oscillatory terms represent coupling between metabolic pathways and cellular regulation.
 
@@ -100,10 +100,10 @@ The oscillatory terms represent coupling between metabolic pathways and cellular
 
 Key enzymes exhibit activity oscillations through allosteric regulation \citep{goldbeter1996biochemical}.
 
-\begin{equation>
+\begin{equation}
 \frac{d[E_{\text{active}}]}{dt} = k_{\text{act}}[E_{\text{total}}] \frac{[S]^n}{K_m^n + [S]^n} - k_{\text{deact}}[E_{\text{active}}] + \gamma \cos(\omega_{\text{reg}}t + \phi_{\text{reg}})
 \label{eq:enzyme_oscillation}
-\end{equation>
+\end{equation}
 
 \section{Cellular Scale Oscillatory Integration}
 
@@ -111,7 +111,7 @@ Key enzymes exhibit activity oscillations through allosteric regulation \citep{g
 
 Cell division cycles couple with metabolic oscillations through checkpoint mechanisms \citep{klevecz1992quantized,lloyd1982ultradian}.
 
-\begin{align>
+\begin{align}
 \frac{d\text{CellMass}}{dt} &= \mu_{\text{specific}} \cdot \text{CellMass} \cdot f([ATP], [NAD^+]) \label{eq:cell_growth} \\
 \frac{d\text{CellNumber}}{dt} &= k_{\text{div}} \cdot \text{CellMass} \cdot H(\text{CellMass} - \text{CriticalMass}) \label{eq:cell_division}
 \end{align}
@@ -125,7 +125,7 @@ Cellular stress responses exhibit oscillatory dynamics through regulatory networ
 \begin{equation}
 \frac{d[HSP]}{dt} = k_{\text{hsp}} \frac{[\text{Stress}]^m}{K_s^m + [\text{Stress}]^m} - k_{\text{deg}}[HSP] + \delta \cos(\omega_{\text{stress}}t + \phi_s)
 \label{eq:stress_response}
-\end{equation>
+\end{equation}
 
 \section{Population Scale Dynamics}
 
@@ -133,10 +133,10 @@ Cellular stress responses exhibit oscillatory dynamics through regulatory networ
 
 Cell populations exhibit oscillatory growth patterns through density-dependent effects \citep{fredrickson2006statistics,nielsen2003principles}.
 
-\begin{equation>
+\begin{equation}
 \frac{dX}{dt} = \mu_{\max} X \frac{S}{K_s + S} \frac{K_I}{K_I + P} - k_d X + \epsilon_X \cos(\omega_{\text{pop}}t + \phi_{\text{pop}})
 \label{eq:population_growth}
-\end{equation>
+\end{equation}
 
 where $X$ is biomass, $S$ is substrate, $P$ is product, and the oscillatory term captures population-level coordination.
 
@@ -147,7 +147,7 @@ Product formation exhibits oscillatory patterns coupled to growth phases \citep{
 \begin{align}
 \frac{dP}{dt} &= q_p X + Y_{P/S} \frac{dS}{dt} + \zeta_P \sin(\omega_{\text{prod}}t + \phi_P) \label{eq:product_formation} \\
 \frac{dS}{dt} &= -\frac{1}{Y_{X/S}} \frac{dX}{dt} - \frac{1}{Y_{P/S}} \frac{dP}{dt} + F(t) \label{eq:substrate_consumption}
-\end{align>
+\end{align}
 
 \section{Reactor Scale Oscillatory Phenomena}
 
@@ -155,10 +155,10 @@ Product formation exhibits oscillatory patterns coupled to growth phases \citep{
 
 Reactor mixing creates oscillatory concentration gradients and mass transfer limitations \citep{enfors2001physiological,bylund2000substrate}.
 
-\begin{equation>
+\begin{equation}
 \frac{d[O_2]}{dt} = k_L a ([O_2^*] - [O_2]) - OUR + M_{\text{mix}} \cos(\omega_{\text{mix}}t + \phi_{\text{mix}})
 \label{eq:oxygen_transfer}
-\end{equation>
+\end{equation}
 
 where $k_L a$ is volumetric mass transfer coefficient, $OUR$ is oxygen uptake rate, and the oscillatory term represents mixing-induced fluctuations.
 
@@ -177,10 +177,10 @@ Reactor pH and temperature exhibit oscillatory dynamics through control system i
 
 Fed-batch processes exhibit oscillatory feeding patterns that couple with cellular dynamics \citep{craven2014process}.
 
-\begin{equation>
+\begin{equation}
 F(t) = F_{\text{base}} + F_{\text{pulse}} \sum_{n} \delta(t - nT_{\text{pulse}}) + F_{\text{sync}} \cos(\omega_{\text{cell}}t + \phi_{\text{feed}})
 \label{eq:feeding_strategy}
-\end{equation>
+\end{equation}
 
 where the synchronized feeding term couples with cellular oscillatory dynamics.
 
@@ -188,10 +188,10 @@ where the synchronized feeding term couples with cellular oscillatory dynamics.
 
 Process control systems introduce oscillatory dynamics through feedback loops \citep{stephanopoulos1984chemical}.
 
-\begin{equation>
+\begin{equation}
 u(t) = K_p e(t) + K_i \int_0^t e(\tau) d\tau + K_d \frac{de}{dt} + K_{\text{osc}} \cos(\omega_{\text{control}}t + \phi_{\text{control}})
 \label{eq:control_oscillations}
-\end{equation>
+\end{equation}
 
 where $e(t)$ is the control error and the oscillatory term represents dynamic control enhancement.
 
@@ -203,20 +203,20 @@ Feeding strategies can be optimized for resonant coupling with cellular dynamics
 
 \begin{theorem}[Resonant Feeding Theorem]
 Maximum substrate utilization efficiency occurs when feeding frequency matches cellular metabolic frequency:
-\begin{equation>
+\begin{equation}
 \omega_{\text{feed,optimal}} = n \omega_{\text{metabolic}}, \quad n \in \mathbb{Z}^+
 \label{eq:resonant_feeding}
-\end{equation>
-\end{theorem>
+\end{equation}
+\end{theorem}
 
 \subsection{Oscillatory Dissolved Oxygen Control}
 
 Dissolved oxygen control can enhance cellular productivity through oscillatory strategies \citep{zhang2010oscillatory}.
 
-\begin{equation>
+\begin{equation}
 [DO]_{\text{setpoint}}(t) = [DO]_{\text{base}} + A_{DO} \cos(\omega_{\text{cell}}t + \phi_{DO})
 \label{eq:oscillatory_do}
-\end{equation>
+\end{equation}
 
 \section{Scale-Up Relationships}
 
@@ -224,10 +224,10 @@ Dissolved oxygen control can enhance cellular productivity through oscillatory s
 
 Scale-up relationships must account for oscillatory coupling preservation across reactor scales.
 
-\begin{equation>
+\begin{equation}
 \left(\frac{P}{V}\right)_{\text{large}} = \left(\frac{P}{V}\right)_{\text{small}} \cdot \prod_{i<j} \left(\frac{D_{ij,\text{large}}}{D_{ij,\text{small}}}\right)^{\alpha_{ij}}
 \label{eq:oscillatory_scaleup}
-\end{equation>
+\end{equation}
 
 where $\alpha_{ij}$ represents coupling-dependent scaling exponents.
 
@@ -237,16 +237,16 @@ where $\alpha_{ij}$ represents coupling-dependent scaling exponents.
 
 Process optimization targets coupling enhancement across multiple objectives.
 
-\begin{equation>
+\begin{equation}
 \max_{\mathbf{u}(t)} J = \int_0^{T_f} \left[ w_1 P(t) + w_2 Y(t) + w_3 \sum_{i<j} D_{ij}(t) \right] dt
 \label{eq:multi_objective}
-\end{equation>
+\end{equation}
 
 subject to oscillatory coupling constraints:
 \begin{equation}
 D_{ij}(t) \geq D_{ij,\min}, \quad \forall i,j
 \label{eq:coupling_constraints}
-\end{equation>
+\end{equation}
 
 \section{Clinical and Industrial Applications}
 
@@ -266,7 +266,7 @@ Enzyme Production & 45 kU/L & 62 kU/L & 38\% \\
 Vaccine Production & 67\% viability & 84\% viability & 25\% \\
 Biofuel Production & 0.42 g/g & 0.51 g/g & 21\% \\
 \hline
-\end{tabular>
+\end{tabular}
 \end{table>
 
 \subsection{Fermentation Process Control}
@@ -299,16 +299,16 @@ Cellular-Population & $0.71 \pm 0.12$ & $0.43 \pm 0.18$ & 65\% \\
 Population-Reactor & $0.66 \pm 0.14$ & $0.38 \pm 0.21$ & 74\% \\
 Reactor-Process & $0.84 \pm 0.07$ & $0.67 \pm 0.16$ & 25\% \\
 \hline
-\end{tabular>
-\end{table>
+\end{tabular}
+\end{table}
 
 \subsection{Control Strategy Performance}
 
 Coupling-based control demonstrated superior performance:
 - Traditional PID control: Baseline productivity
-- Oscillatory coupling control: 24% average improvement
-- Resonant feeding strategies: 31% improvement in substrate utilization
-- Multi-scale synchronization: 35% improvement in product quality
+- Oscillatory coupling control: 24\% average improvement
+- Resonant feeding strategies: 31\% improvement in substrate utilization
+- Multi-scale synchronization: 35\% improvement in product quality
 
 \section{Discussion}
 

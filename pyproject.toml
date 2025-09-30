@@ -1,0 +1,184 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cardiovascular-oscillatory-framework"
+version = "1.0.0"
+authors = [
+    {name = "Kundai Farai Sachikonye", email = "kundai.sachikonye@wzw.tum.de"},
+]
+description = "Universal Oscillatory Framework for Cardiovascular Analysis"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+keywords = ["cardiovascular", "oscillatory", "signal-processing", "physiology", "hrv", "ecg", "ppg"]
+
+dependencies = [
+    "numpy>=1.21.0,<2.0.0",
+    "scipy>=1.7.0,<2.0.0",
+    "pandas>=1.3.0,<3.0.0",
+    "matplotlib>=3.4.0,<4.0.0",
+    "seaborn>=0.11.0,<1.0.0",
+    "scikit-learn>=1.0.0,<2.0.0",
+    "heartpy>=1.2.7,<2.0.0",
+    "neurokit2>=0.2.0,<1.0.0",
+    "pyhrv>=0.4.0,<1.0.0",
+    "pywavelets>=1.3.0,<2.0.0",
+    "pydantic>=1.8.0,<2.0.0",
+    "jsonschema>=4.0.0,<5.0.0",
+    "pyyaml>=6.0.0,<7.0.0",
+    "numba>=0.56.0,<1.0.0",
+    "plotly>=5.0.0,<6.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0,<8.0.0",
+    "pytest-cov>=4.0.0,<5.0.0",
+    "black>=22.0.0,<24.0.0",
+    "flake8>=4.0.0,<7.0.0",
+    "mypy>=0.950,<2.0.0",
+    "pre-commit>=2.17.0,<4.0.0",
+    "isort>=5.10.0,<6.0.0",
+]
+docs = [
+    "sphinx>=4.5.0,<7.0.0",
+    "sphinx-rtd-theme>=1.0.0,<2.0.0",
+    "myst-parser>=0.17.0,<1.0.0",
+]
+gpu = [
+    "cupy-cuda11x>=11.0.0,<12.0.0",
+]
+ml = [
+    "tensorflow>=2.8.0,<3.0.0",
+    "torch>=1.11.0,<2.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/fullscreen-triangle/huygens"
+"Bug Tracker" = "https://github.com/fullscreen-triangle/huygens/issues"
+"Documentation" = "https://huygens.readthedocs.io/"
+"Source Code" = "https://github.com/fullscreen-triangle/huygens"
+
+[project.scripts]
+cardiovascular-analysis = "src.analyze_cardiovascular_data:main"
+oscillatory-demo = "demo.run_comprehensive_demo:main"
+
+# Tool configurations
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | experimental-data
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 88
+skip_gitignore = true
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503", "E501"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "docs/source/conf.py",
+    "old",
+    "build",
+    "dist",
+    "experimental-data"
+]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "heartpy.*",
+    "neurokit2.*",
+    "pyhrv.*",
+    "plotly.*",
+    "seaborn.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = [
+    "tests",
+    "demo/tests",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+
+[tool.coverage.run]
+source = ["src", "demo"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "setup.py",
+    "*/experimental-data/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\bProtocol\):",
+    "@(abc\.)?abstractmethod",
+]

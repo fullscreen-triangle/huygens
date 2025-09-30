@@ -1285,12 +1285,12 @@ def main():
     try:
         # Use YOUR actual data paths (relative to demo directory)
         results = analyzer.analyze_comprehensive_data(
-            daily_hr_path="../experimental-data/heart/intrasecond_heart_fitbit.json",
-            running_hr_path="../experimental-data/heart/intrasecond_running.json", 
-            hrv_data_path="../experimental-data/heart/hrv_1.json",
-            actigram_path="../experimental-data/actigraphy/actigram.json",
-            sleep_data_path="../experimental-data/sleep/infraredSleep.json",
-            readiness_path="../experimental-data/actigraphy/readiness.json"
+            daily_hr_path="public/intrasecond_heart_fitbit.json",
+            running_hr_path="public/intrasecond_running.json",
+            hrv_data_path="public/heart/hrv_1.json",
+            actigram_path="public/actigraphy/actigram.json",
+            sleep_data_path="public/infraredSleep.json",
+            readiness_path="public/readiness.json"
         )
         
         # Generate comprehensive report
