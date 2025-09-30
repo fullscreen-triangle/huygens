@@ -1,0 +1,303 @@
+# Universal Oscillatory Framework for Cardiovascular Analysis
+# Global Configuration File
+
+# Framework Configuration
+oscillatory_framework:
+  # Eight-scale oscillatory hierarchy
+  scales:
+    quantum_physiological:
+      frequency_range: [1.0e12, 1.0e15]  # Hz
+      description: "Quantum coherence in biological systems"
+      enabled: true
+      precision: 1.0e-18
+    
+    ion_channel:
+      frequency_range: [1.0e6, 1.0e9]  # Hz
+      description: "Ion channel oscillations and membrane dynamics"
+      enabled: true
+      precision: 1.0e-12
+    
+    cellular_electrophysiology:
+      frequency_range: [1.0e3, 1.0e6]  # Hz
+      description: "Cellular electrical activity and signaling"
+      enabled: true
+      precision: 1.0e-9
+    
+    qrs_complex:
+      frequency_range: [10.0, 100.0]  # Hz
+      description: "QRS complex dynamics and cardiac electrophysiology"
+      enabled: true
+      precision: 1.0e-6
+    
+    cardiac_cycle:
+      frequency_range: [1.0, 10.0]  # Hz
+      description: "Cardiac cycle coordination and rhythm"
+      enabled: true
+      precision: 1.0e-3
+    
+    respiratory_coupling:
+      frequency_range: [0.1, 1.0]  # Hz
+      description: "Respiratory-cardiac coupling dynamics"
+      enabled: true
+      precision: 1.0e-3
+    
+    autonomic_integration:
+      frequency_range: [0.01, 0.1]  # Hz
+      description: "Autonomic nervous system integration"
+      enabled: true
+      precision: 1.0e-3
+    
+    circadian_cardiovascular:
+      frequency_range: [1.0e-5, 1.0e-6]  # Hz
+      description: "Circadian cardiovascular rhythms"
+      enabled: true
+      precision: 1.0e-3
+
+  # S-entropy coordinate system
+  s_entropy:
+    precision_threshold: 1.0e-12
+    coordinate_dimensions: 3
+    calculation_method: "direct_alignment"
+    pattern_alignment_threshold: 0.95
+    
+    coordinates:
+      s_temporal:
+        weight: 1.0
+        normalization: "physiological_baseline"
+      s_frequency:
+        weight: 1.0
+        normalization: "spectral_baseline"
+      s_amplitude:
+        weight: 1.0
+        normalization: "amplitude_baseline"
+
+  # Direct pattern alignment
+  pattern_alignment:
+    complexity: "O(1)"
+    method: "predetermined_solution_coordinates"
+    coherence_threshold: 0.90
+    validation_method: "multi_scale_coherence"
+
+# Cardiovascular Analysis Configuration
+cardiovascular_analysis:
+  # Signal processing
+  signal_processing:
+    default_sampling_rate: 250.0  # Hz
+    minimum_signal_quality: 0.7
+    filter_specifications:
+      bandpass:
+        low_cutoff: 0.5  # Hz
+        high_cutoff: 50.0  # Hz
+        order: 4
+      notch:
+        frequency: 50.0  # Hz (power line interference)
+        quality_factor: 30
+
+  # Multi-sensor fusion
+  multi_sensor_fusion:
+    method: "oscillatory_coherence_weighted"
+    sensor_weights:
+      professional_ecg: 1.0
+      chest_strap_ecg: 0.9
+      smart_ring_ppg: 0.8
+      watch_ppg: 0.7
+      fitness_tracker: 0.6
+      smartphone_camera: 0.4
+    
+    fusion_algorithm: "kalman_oscillatory_enhanced"
+    adaptive_weighting: true
+    quality_threshold: 0.6
+
+  # Heart Rate Variability Analysis
+  hrv_analysis:
+    time_domain:
+      enabled: true
+      metrics: ["RMSSD", "SDNN", "pNN50", "triangular_index"]
+    
+    frequency_domain:
+      enabled: true
+      bands:
+        VLF: [0.003, 0.04]  # Hz
+        LF: [0.04, 0.15]    # Hz
+        HF: [0.15, 0.4]     # Hz
+      
+    entropy_measures:
+      enabled: true
+      methods: ["sample_entropy", "approximate_entropy", "shannon_entropy"]
+      parameters:
+        sample_entropy:
+          m: 2  # pattern length
+          r: 0.2  # tolerance
+        approximate_entropy:
+          m: 2
+          r: 0.2
+
+  # QRS Detection
+  qrs_detection:
+    algorithm: "pan_tompkins_oscillatory_enhanced"
+    parameters:
+      bandpass_filter: [5.0, 15.0]  # Hz
+      derivative_filter_enabled: true
+      squaring_enabled: true
+      integration_window: 0.15  # seconds
+      refractory_period: 0.3  # seconds
+    
+    validation:
+      minimum_rr_interval: 0.4  # seconds
+      maximum_rr_interval: 2.0  # seconds
+      quality_threshold: 0.8
+
+# Real-time Processing Configuration
+real_time_processing:
+  enabled: false
+  buffer_size: 2500  # samples
+  processing_latency_target: 0.001  # seconds (1ms)
+  update_frequency: 100  # Hz
+  
+  streaming:
+    protocol: "websocket"
+    port: 8765
+    max_connections: 10
+
+# Data Management
+data_management:
+  input_formats: ["json", "csv", "hdf5", "mat"]
+  output_formats: ["json", "html", "pdf", "csv"]
+  
+  validation:
+    schema_validation: true
+    timestamp_validation: true
+    signal_quality_validation: true
+  
+  storage:
+    results_directory: "results"
+    temporary_directory: "tmp"
+    log_directory: "logs"
+    
+  privacy:
+    anonymization: true
+    encryption_at_rest: false
+    retention_policy: "30_days"
+
+# Visualization Configuration
+visualization:
+  default_theme: "scientific"
+  figure_format: "svg"
+  figure_dpi: 300
+  interactive_plots: true
+  
+  color_schemes:
+    oscillatory_scales:
+      quantum_physiological: "#e8eaf6"
+      ion_channel: "#e0f2f1"
+      cellular_electrophysiology: "#f1f8e9"
+      qrs_complex: "#fce4ec"
+      cardiac_cycle: "#fff3e0"
+      respiratory_coupling: "#e8f5e8"
+      autonomic_integration: "#f3e5f5"
+      circadian_cardiovascular: "#e1f5fe"
+
+# Validation and Testing
+validation:
+  synthetic_data_generation: true
+  performance_benchmarking: true
+  
+  benchmarks:
+    accuracy_target: 0.95
+    processing_speed_target: 0.001  # seconds
+    memory_usage_target: 100  # MB
+  
+  test_data:
+    synthetic_ecg_duration: 300  # seconds
+    noise_levels: [0.0, 0.1, 0.2, 0.5]
+    heart_rate_ranges: [[60, 80], [80, 120], [120, 180]]
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  handlers:
+    console:
+      enabled: true
+      level: "INFO"
+    
+    file:
+      enabled: true
+      level: "DEBUG"
+      filename: "logs/cardiovascular_analysis.log"
+      max_size: "10MB"
+      backup_count: 5
+    
+    scientific_audit:
+      enabled: true
+      filename: "logs/scientific_audit.log"
+      include_parameters: true
+      include_results: true
+
+# Development and Debug Configuration
+development:
+  debug_mode: false
+  profiling_enabled: false
+  verbose_output: false
+  
+  testing:
+    use_synthetic_data: true
+    skip_slow_tests: false
+    parallel_testing: true
+  
+  experimental_features:
+    quantum_coherence_analysis: false
+    consciousness_aware_processing: false
+    advanced_ml_integration: false
+
+# External Integrations
+integrations:
+  # Scientific computing libraries
+  numpy_optimization: "mkl"  # or "openblas"
+  scipy_backend: "default"
+  
+  # Hardware acceleration
+  gpu_acceleration:
+    enabled: false
+    backend: "cupy"  # or "tensorflow", "torch"
+  
+  # Cloud services
+  cloud_storage:
+    enabled: false
+    provider: "aws"  # or "gcp", "azure"
+    bucket: "cardiovascular-data"
+  
+  # Databases
+  database:
+    enabled: false
+    type: "postgresql"  # or "mysql", "sqlite"
+    connection_string: "postgresql://localhost/cardiovascular_db"
+
+# Security Configuration
+security:
+  data_encryption: false
+  secure_communication: true
+  audit_logging: true
+  
+  authentication:
+    required: false
+    method: "token"  # or "oauth", "ldap"
+  
+  data_privacy:
+    anonymization_method: "k_anonymity"
+    differential_privacy: false
+    consent_management: true
+
+# Scientific Reproducibility
+reproducibility:
+  random_seed: 42
+  version_tracking: true
+  parameter_logging: true
+  environment_recording: true
+  
+  archival:
+    archive_results: true
+    archive_code: true
+    archive_environment: true
+    retention_period: "5_years"
