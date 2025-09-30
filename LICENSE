@@ -1,0 +1,65 @@
+MIT License
+
+Copyright (c) 2024 Kundai Farai Sachikonye
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## Additional Terms for Academic and Research Use
+
+This software implements the Universal Oscillatory Framework for Cardiovascular 
+Analysis as described in academic publications. When using this software for 
+academic or research purposes, please cite the original research:
+
+1. Sachikonye, K.F. (2024). "Grand Unified Biological Oscillations: A 
+   Comprehensive Theory of Multi-Scale Oscillatory Coupling in Biological Systems"
+
+2. Sachikonye, K.F. (2024). "Complete Universal Framework: Natural Naked Engines 
+   and Biological O(1) Complexity through S-Entropy Coordinate Navigation"
+
+3. Sachikonye, K.F. (2024). "Universal Oscillatory Framework for Cardiovascular 
+   Analysis: Multi-Scale Oscillatory Coupling and Real-Time Physiological Intelligence"
+
+## Research Ethics and Data Use
+
+This software is designed for research and educational purposes. When processing 
+human physiological data:
+
+1. Ensure appropriate institutional review board (IRB) approval
+2. Obtain informed consent from participants
+3. Follow applicable privacy laws and regulations (HIPAA, GDPR, etc.)
+4. Implement appropriate data security measures
+5. Report research findings responsibly and accurately
+
+## Patent Notice
+
+The Universal Oscillatory Framework and related S-entropy coordinate navigation 
+techniques described in this software may be subject to patent applications. 
+Commercial use may require appropriate licensing agreements.
+
+## Disclaimer
+
+This software is provided for research and educational purposes only. It is not 
+intended for clinical diagnosis, treatment, or medical decision-making. Users 
+are responsible for ensuring appropriate validation and regulatory compliance 
+for any clinical applications.
+
+THE AUTHORS AND COPYRIGHT HOLDERS DISCLAIM ALL LIABILITY FOR ANY DIRECT, 
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES RESULTING 
+FROM THE USE OF THIS SOFTWARE, INCLUDING BUT NOT LIMITED TO MEDICAL 
+MALPRACTICE CLAIMS, REGULATORY VIOLATIONS, OR ACADEMIC MISCONDUCT.
