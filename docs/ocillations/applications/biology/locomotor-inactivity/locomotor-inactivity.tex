@@ -20,7 +20,7 @@ Institution Name
 
 \begin{abstract}
 Locomotor activity and rest-activity patterns represent complex integrations of multiple oscillatory systems spanning molecular circadian clocks to behavioral motor patterns. Current approaches typically analyze circadian rhythms, sleep-wake cycles, and motor activity as separate phenomena controlled by distinct regulatory mechanisms. We present a unified mathematical framework based on multi-scale oscillatory coupling theory that reframes activity patterns from independent rhythm generation to coupled oscillator network dynamics. The framework demonstrates that locomotor inactivity disorders and circadian disruption emerge from oscillatory decoupling rather than individual clock dysfunction. Mathematical analysis reveals that activity patterns represent coupling signatures between molecular clockwork, neural pattern generators, metabolic oscillations, and environmental synchronization cues. Application to actigraphy data demonstrates improved characterization of sleep disorders, metabolic dysfunction, and neurological conditions affecting motor control through oscillatory coupling analysis.
-\end{abstract>
+\end{abstract}
 
 \section{Introduction}
 
@@ -57,7 +57,7 @@ The locomotor oscillatory scales are:
 \text{Scale 5: } &\text{Activity-Rest} \quad (T_5 \sim 12-24 \text{ h}) \label{eq:activity_rest} \\
 \text{Scale 6: } &\text{Seasonal} \quad (T_6 \sim 365 \text{ d}) \label{eq:seasonal}
 \end{align}
-\end{definition>
+\end{definition}
 
 \subsection{Activity Pattern Coupling Quantification}
 
@@ -65,21 +65,21 @@ Coupling between activity scales is characterized through phase-amplitude and fr
 
 \begin{definition}[Activity Coupling Strength]
 The coupling strength between locomotor scales $i$ and $j$ is:
-\begin{equation>
+\begin{equation}
 K_{ij}(t) = \frac{1}{T} \int_0^T \left| A_i(t) A_j(t) \cos(\phi_i(t) - \phi_j(t)) \right| dt
 \label{eq:activity_coupling}
-\end{equation>
+\end{equation}
 where $A_i(t)$ and $\phi_i(t)$ represent amplitude and phase of scale $i$.
-\end{definition>
+\end{definition}
 
 \begin{definition}[Locomotor Activity as Network Output]
 Observed locomotor activity emerges from network coupling dynamics:
-\begin{equation>
+\begin{equation}
 \text{Activity}(t) = \sum_{i=1}^{N} W_i A_i(t) \cos(\phi_i(t)) \prod_{j \neq i} [1 + \epsilon_{ij} K_{ij}(t)]
 \label{eq:activity_output}
-\end{equation>
+\end{equation}
 where $W_i$ are scale-specific weights and $\epsilon_{ij}$ represents coupling efficiency.
-\end{definition>
+\end{definition}
 
 \section{Molecular Clock Oscillatory Dynamics}
 
@@ -87,7 +87,7 @@ where $W_i$ are scale-specific weights and $\epsilon_{ij}$ represents coupling e
 
 Molecular circadian clocks operate through coupled transcriptional-translational feedback oscillators \citep{takahashi2017transcriptional}.
 
-\begin{align>
+\begin{align}
 \frac{d[CLOCK]}{dt} &= v_{\text{CLK}} - \delta_{\text{CLK}} [CLOCK] + \alpha_{12} \sin(\omega_2 t + \phi_{12}) \label{eq:clock} \\
 \frac{d[PER]}{dt} &= v_{\text{PER}} \frac{[CLOCK]^n}{K^n + [CLOCK]^n} - \delta_{\text{PER}} [PER] \label{eq:per} \\
 \frac{d[CRY]}{dt} &= v_{\text{CRY}} \frac{[CLOCK]^m}{K_2^m + [CLOCK]^m} - \delta_{\text{CRY}} [CRY] \label{eq:cry}
@@ -102,7 +102,7 @@ Clock protein activity is modulated by oscillatory post-translational modificati
 \begin{equation}
 \frac{d[PER_{\text{active}}]}{dt} = k_{\text{phos}} [PER] [CKI\delta] \cos(\omega_{\text{met}} t) - k_{\text{dephos}} [PER_{\text{active}}] [PP1]
 \label{eq:per_modification}
-\end{equation>
+\end{equation}
 
 \section{Cellular Clock Network Integration}
 
@@ -135,7 +135,7 @@ Locomotor central pattern generators exhibit coupled oscillatory dynamics that g
 \begin{align}
 \frac{d\mathbf{x}_{\text{flex}}}{dt} &= \mathbf{f}_{\text{flex}}(\mathbf{x}_{\text{flex}}) + \mathbf{C}_{\text{flex-ext}}(\mathbf{x}_{\text{ext}}) \label{eq:flexor_cpg} \\
 \frac{d\mathbf{x}_{\text{ext}}}{dt} &= \mathbf{f}_{\text{ext}}(\mathbf{x}_{\text{ext}}) + \mathbf{C}_{\text{ext-flex}}(\mathbf{x}_{\text{flex}}) \label{eq:extensor_cpg}
-\end{align>
+\end{align}
 
 where $\mathbf{C}_{\text{flex-ext}}$ and $\mathbf{C}_{\text{ext-flex}}$ represent mutual inhibitory coupling between flexor and extensor half-centers.
 
@@ -143,10 +143,10 @@ where $\mathbf{C}_{\text{flex-ext}}$ and $\mathbf{C}_{\text{ext-flex}}$ represen
 
 Different gait patterns emerge from coupling relationships between limb CPG oscillators \citep{ijspeert2008central}:
 
-\begin{equation>
+\begin{equation}
 \phi_{\text{limb},i}(t) = \omega_{\text{gait}} t + \Delta\phi_i + \epsilon_i \sum_{j \neq i} K_{ij} \sin(\phi_j - \phi_i)
 \label{eq:gait_coupling}
-\end{equation>
+\end{equation}
 
 where $\Delta\phi_i$ determines the gait pattern (walk, trot, gallop) and $K_{ij}$ represents interlimb coupling strength.
 
@@ -162,7 +162,7 @@ The two-process sleep-wake model can be extended to include oscillatory coupling
 -S/\tau_d + \beta_S \cos(\omega_C t + \phi_{SC}), & \text{sleep}
 \end{cases} \label{eq:homeostatic_coupled} \\
 \frac{dC}{dt} &= \frac{2\pi}{T} + \gamma_C S(t) \sin(\omega_C t) \label{eq:circadian_coupled}
-\end{align>
+\end{align}
 
 The coupling terms $\alpha_S \cos(\omega_C t + \phi_{SC})$, $\beta_S \cos(\omega_C t + \phi_{SC})$, and $\gamma_C S(t) \sin(\omega_C t)$ represent bidirectional coupling between homeostatic sleep pressure and circadian timing.
 
@@ -184,7 +184,7 @@ Daily activity patterns result from coupling between circadian clocks and motor 
 \begin{equation}
 \text{Activity}_{\text{circadian}}(t) = A_0 + A_1 \cos(\omega_{\text{circ}} t + \phi_{\text{act}}) + \sum_{n=2}^N A_n \cos(n\omega_{\text{circ}} t + \phi_n)
 \label{eq:circadian_activity}
-\end{equation>
+\end{equation}
 
 \subsection{Ultradian Activity Rhythms}
 
@@ -193,7 +193,7 @@ Activity patterns exhibit ultradian oscillations coupled to metabolic and sleep 
 \begin{equation}
 \text{Activity}_{\text{ultradian}}(t) = \sum_{k} B_k \cos(\omega_k t + \psi_k) \cdot H(\text{Wake}(t))
 \label{eq:ultradian_activity}
-\end{equation>
+\end{equation}
 
 where $H(\text{Wake}(t))$ is a step function representing wake state gating.
 
@@ -231,7 +231,7 @@ Circadian rhythm disorders occur when entrainment coupling strength falls below 
 K_{\text{entrainment}} < K_{\text{critical}} = \frac{\sigma_{\text{internal}}}{\text{Zeitgeber amplitude}}
 \label{eq:circadian_threshold}
 \end{equation}
-\end{theorem>
+\end{theorem}
 
 \subsection{Sleep Disorders as Coupling Dysfunction}
 
@@ -240,7 +240,7 @@ Sleep disorders involve disrupted coupling between circadian, homeostatic, and a
 \begin{equation}
 \text{Sleep Quality} = \prod_{i<j} \exp(-|K_{ij} - K_{ij,\text{optimal}}|^2 / \sigma_{\text{coupling}}^2)
 \label{eq:sleep_quality}
-\end{equation>
+\end{equation}
 
 \subsection{Motor Disorders and CPG Decoupling}
 
@@ -249,7 +249,7 @@ Motor disorders can result from decoupling between central pattern generators an
 \begin{equation}
 \text{Motor dysfunction} \propto \exp\left(-\frac{\sum_{i} K_{\text{CPG},i}}{\sum_{i} K_{\text{CPG},i,\text{healthy}}}\right)
 \label{eq:motor_dysfunction}
-\end{equation>
+\end{equation}
 
 \section{Metabolic Oscillatory Integration}
 
@@ -260,7 +260,7 @@ Feeding behavior exhibits oscillatory coupling with circadian clocks and metabol
 \begin{align}
 \frac{d\text{Glucose}}{dt} &= -k_{\text{gluc}} \text{Glucose} + F_{\text{feeding}}(t) + G_{\text{circ}} \cos(\omega_{\text{circ}} t) \label{eq:glucose} \\
 \frac{d\text{Insulin}}{dt} &= k_{\text{ins}} \text{Glucose} - \delta_{\text{ins}} \text{Insulin} + I_{\text{circ}} \cos(\omega_{\text{circ}} t + \phi_I) \label{eq:insulin}
-\end{align>
+\end{align}
 
 \subsection{Exercise-Induced Oscillatory Coupling}
 
@@ -280,7 +280,7 @@ Traditional actigraphy analysis can be enhanced through oscillatory coupling ass
 \begin{equation}
 \text{Coupling Index} = \frac{1}{M} \sum_{i<j} \left| \text{Coherence}(\text{Activity}_i, \text{Activity}_j) \right|^2
 \label{eq:actigraphy_coupling}
-\end{equation>
+\end{equation}
 
 \subsection{Circadian Disruption Assessment}
 
@@ -289,7 +289,7 @@ Circadian disruption can be quantified through coupling degradation measures:
 \begin{equation}
 \text{Disruption Score} = 1 - \frac{K_{\text{measured}}}{K_{\text{healthy}}} \cdot \exp(-|\phi_{\text{measured}} - \phi_{\text{optimal}}|/\sigma_\phi)
 \label{eq:disruption_score}
-\end{equation>
+\end{equation}
 
 \subsection{Sleep Disorder Diagnosis}
 
@@ -298,7 +298,7 @@ Sleep disorders can be diagnosed through coupling pattern analysis:
 \begin{equation}
 \text{Sleep Disorder Probability} = \text{logit}^{-1}\left(\sum_{i} \beta_i \log(K_{i,\text{measured}}/K_{i,\text{normal}})\right)
 \label{eq:sleep_diagnosis}
-\end{equation>
+\end{equation}
 
 \section{Validation and Results}
 
@@ -321,14 +321,14 @@ Ultradian Patterns & $0.76 \pm 0.12$ & $0.39 \pm 0.17$ & $0.33 \pm 0.23$ & $0.29
 Motor Coordination & $0.91 \pm 0.05$ & $0.86 \pm 0.09$ & $0.79 \pm 0.14$ & $0.31 \pm 0.28$ \\
 \hline
 \end{tabular}
-\end{table>
+\end{table}
 
 \subsubsection{Diagnostic Performance}
 
 Coupling-based analysis demonstrated improved diagnostic accuracy:
-- Traditional actigraphy metrics: Sensitivity 65%, Specificity 72%
-- Coupling-based analysis: Sensitivity 87%, Specificity 89%
-- Combined multimodal approach: Sensitivity 93%, Specificity 91%
+- Traditional actigraphy metrics: Sensitivity 65\%, Specificity 72\%
+- Coupling-based analysis: Sensitivity 87\%, Specificity 89\%
+- Combined multimodal approach: Sensitivity 93\%, Specificity 91\%
 
 \section{Discussion}
 

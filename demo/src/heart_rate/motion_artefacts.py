@@ -1,0 +1,6 @@
+# using the oscillatory theorem, a combination of the actigram data and heart rate should instead, in our case, lead to more accurate readings instead of them being motion artefacts
+
+
+"""
+Accelerometers and gyroscopes may provide additional motion information to interpret heart rate changes in context of various activities. Accelerometers primarily detect changes in linear motion in 3 axes whereas gyroscopes primarily measure angular motion. This additional input is helpful in athletic applications. In addition to motion detection, these can be used as primary sensors: data from these sensors can be fed into devices using ballistocardiogram (BCG)-based heart rate detection. BCG analyzes the repetitive motion of the human body arising from the sudden ejection of blood into the great vessels with each heartbeat [40]. The accuracy of acceleration-based sensors is affected by the site of placement on human body [41]. Integration with barometers and global positioning system (GPS) may improve the accurate assessment of activity-related HR/HRV changes—these technologies are readily available in consumer devices such as smartphones, however, this approach has not been validated ye
+"""

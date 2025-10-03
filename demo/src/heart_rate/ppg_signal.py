@@ -1,0 +1,5 @@
+"""
+
+PPG signals also provide opportunities to assess the parameters of blood pressure (BP) and peripheral blood flow. [52–54]. Almarshad et al. showed that PPG and BP signals have the same frequency components as sequences of RR intervals in the LF band [52]. With the unique association of LF oscillations in RR intervals with autonomic processes, LF oscillations in PPG, as well as local regulation mechanisms, reflect the mechanism of autonomic control of blood circulation. According to the high coherence between BP and PPG signals, it is possible to study autonomic control of blood pressure using the PPG signal instead of BP. Moreover, other studies have demonstrated the functional autonomy of the LF oscillations of the heart rhythm and peripheral blood flow by PPG signal analysis [53, 54]. Extracting accurate HRV parameters and their oscillation is also desired for other health applications such as blood pressure measurement
+
+"""
