@@ -1,8 +1,12 @@
-# Universal Oscillatory Framework: A Complete Solver for Multi-Domain Problem Expression
+# Universal Oscillatory Framework: A Solver for Multi-Domain Problem Expression
+
+<div align="center">
+  <img src="assets/img/Christiaan_Huygens-painting.jpeg" alt="Borgia Logo" width="200"/>
+</div>
 
 ## Abstract
 
-This paper presents the Universal Oscillatory Framework, a mathematical and computational solver that demonstrates how any problem across any domain can be expressed and solved through multi-scale oscillatory dynamics. The framework establishes that oscillatory patterns represent the fundamental substrate of physical reality, with all phenomena—from quantum mechanics to biological systems, from network coordination to audio processing—emerging as manifestations of hierarchical oscillatory coupling.
+Huygens is an Oscillatory Framework, a mathematical and computational solver that demonstrates how any problem across any domain can be expressed and solved through multi-scale oscillatory dynamics. The framework establishes that oscillatory patterns represent the fundamental substrate of physical reality, with all phenomena—from quantum mechanics to biological systems, from network coordination to audio processing—emerging as manifestations of hierarchical oscillatory coupling.
 
 We demonstrate that traditional computational approaches represent approximations of continuous oscillatory reality, where discrete mathematics captures only 5% of the complete oscillatory space while 95% remains as "dark computational matter." The framework achieves O(1) computational complexity through direct pattern alignment with predetermined oscillatory solution coordinates, eliminating traditional iterative processing overhead across all application domains.
 
